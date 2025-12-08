@@ -15,6 +15,6 @@ root.render(
       position: [2.5, 4, 6],
     }}
   >
-    <Experience />
+    <Experience levels={3} />
   </Canvas>
 );
