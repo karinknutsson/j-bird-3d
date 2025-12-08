@@ -33,7 +33,6 @@ function getCubeRing(level) {
 }
 
 export function CubeLevel({ level }) {
-  const cubeCount = Math.pow(level + 1, 2);
   const positions = getCubeRing(level);
 
   return (
@@ -50,9 +49,11 @@ export function CubeLevel({ level }) {
 export default function Pyramid({ levelCount = 5 }) {
   return (
     <>
-      {[...Array(levelCount)].map((_, index) => {
-        return <CubeLevel key={index} level={index} />;
-      })}
+      <group position={[0, levelCount * cubeSize * 0.5, 0]}>
+        {[...Array(levelCount)].map((_, index) => {
+          return <CubeLevel key={index} level={index} />;
+        })}
+      </group>
     </>
   );
 }
