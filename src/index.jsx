@@ -12,7 +12,7 @@ root.render(
       { name: "upLeft", keys: ["Numpad7"] },
       { name: "upRight", keys: ["Numpad9"] },
       { name: "downLeft", keys: ["Numpad1"] },
-      { name: "downRight", keys: ["Numpad2"] },
+      { name: "downRight", keys: ["Numpad3"] },
     ]}
   >
     <Canvas

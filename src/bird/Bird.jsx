@@ -29,8 +29,23 @@ export default function Bird({ position, rotation }) {
   const bird = useRef();
   const [subscribeKeys, getKeys] = useKeyboardControls();
 
+  /**
+   * Jump functionality
+   */
   const jumpDownLeft = () => {
     bird.current.applyImpulse({ x: 0, y: 0.5, z: 0.15 });
+  };
+
+  const jumpDownRight = () => {
+    bird.current.applyImpulse({ x: 0.15, y: 0.5, z: 0 });
+  };
+
+  const jumpUpLeft = () => {
+    bird.current.applyImpulse({ x: -0.125, y: 0.9, z: 0 });
+  };
+
+  const jumpUpRight = () => {
+    bird.current.applyImpulse({ x: 0, y: 0.9, z: -0.125 });
   };
 
   useEffect(() => {
@@ -40,21 +55,43 @@ export default function Bird({ position, rotation }) {
         if (value) jumpDownLeft();
       }
     );
+
+    const unsubscribeJumpDownRight = subscribeKeys(
+      (state) => state.downRight,
+      (value) => {
+        if (value) jumpDownRight();
+      }
+    );
+
+    const unsubscribeJumpUpRight = subscribeKeys(
+      (state) => state.upRight,
+      (value) => {
+        if (value) jumpUpRight();
+      }
+    );
+
+    const unsubscribeJumpUpLeft = subscribeKeys(
+      (state) => state.upLeft,
+      (value) => {
+        if (value) jumpUpLeft();
+      }
+    );
+
     return () => {
       unsubscribeJumpDownLeft();
+      unsubscribeJumpDownRight();
+      unsubscribeJumpUpRight();
+      unsubscribeJumpUpLeft();
     };
   }, []);
 
   return (
     <RigidBody ref={bird} colliders={false}>
-      {/* <CuboidCollider
-        position={position}
-        rotation={rotation}
-        args={[0.2, 0.36, 0.2]}
-      /> */}
-      <ConeCollider position={position} args={[0.36, 0.2]} mass={0.2} />
+      {/* Collider */}
+      <ConeCollider position={position} args={[0.36, 0.169]} mass={0.2} />
+
       <group position={position} rotation={rotation} scale={0.2}>
-        {/* Body*/}
+        {/* Body */}
         <mesh
           geometry={sphereGeometry}
           material={birdMaterial}
