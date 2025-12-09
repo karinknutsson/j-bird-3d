@@ -8,6 +8,16 @@ const birdMaterial = new THREE.MeshStandardMaterial({ color: "#ffffff" });
 const legMaterial = new THREE.MeshStandardMaterial({ color: "#fc5454" });
 const eyeMaterial = new THREE.MeshStandardMaterial({ color: "#000000" });
 
+const topFeatherGeometry = new THREE.BoxGeometry(0.2, 0.8, 1.6);
+const topFeatherMatrix = new THREE.Matrix4();
+topFeatherMatrix.makeShear(0, 0, 0, 0, 0, -0.6);
+topFeatherGeometry.applyMatrix4(topFeatherMatrix);
+
+const bottomFeatherGeometry = new THREE.BoxGeometry(0.2, 0.4, 1.6);
+const bottomFeatherMatrix = new THREE.Matrix4();
+bottomFeatherMatrix.makeShear(0, 0, 0, 0, 0, -0.2);
+bottomFeatherGeometry.applyMatrix4(bottomFeatherMatrix);
+
 export default function Bird({ position }) {
   return (
     <group position={position} scale={0.25}>
@@ -37,11 +47,25 @@ export default function Bird({ position }) {
       {/* Beek */}
       <mesh
         geometry={coneGeometry}
-        material={birdMaterial}
+        material={legMaterial}
         position={[0, -0.3, 1.3]}
         scale={[0.4, 1, 0.4]}
         rotation={[Math.PI * 0.6, 0, 0]}
       />
+
+      {/* Feathers */}
+      <group position={[0, 0, -1.4]}>
+        <mesh
+          geometry={topFeatherGeometry}
+          material={birdMaterial}
+          position={[0, 0.3, 0]}
+        />
+        <mesh
+          geometry={bottomFeatherGeometry}
+          material={birdMaterial}
+          position={[0, -0.3, 0]}
+        />
+      </group>
 
       {/* Left leg */}
       <group position={[0.4, 0.1, 0]}>
