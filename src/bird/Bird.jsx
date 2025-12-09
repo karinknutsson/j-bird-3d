@@ -24,13 +24,25 @@ export default function Bird({ position }) {
   const bird = useRef();
   const birdDirection = useRef("downLeft");
   const [subscribeKeys, getKeys] = useKeyboardControls();
+  let isJumping = false;
 
   /**
    * Jump functionality
    */
+  // Lock / unlock jump
+  const setIsJumping = (value) => {
+    if (value) {
+      isJumping = true;
+    } else {
+      setTimeout(() => {
+        isJumping = false;
+      }, 800);
+    }
+  };
 
   // Jump down left
   const jumpDownLeft = () => {
+    setIsJumping(true);
     bird.current.applyImpulse({ x: 0, y: 1.2, z: 0.39 });
 
     if (birdDirection.current === "downRight") {
@@ -42,10 +54,12 @@ export default function Bird({ position }) {
     }
 
     birdDirection.current = "downLeft";
+    setIsJumping(false);
   };
 
   // Jump down right
   const jumpDownRight = () => {
+    setIsJumping(true);
     bird.current.applyImpulse({ x: 0.39, y: 1.2, z: 0 });
 
     if (birdDirection.current === "downLeft") {
@@ -57,10 +71,12 @@ export default function Bird({ position }) {
     }
 
     birdDirection.current = "downRight";
+    setIsJumping(false);
   };
 
   // Jump up left
   const jumpUpLeft = () => {
+    setIsJumping(true);
     bird.current.applyImpulse({ x: -0.29, y: 2.4, z: 0 });
 
     if (birdDirection.current === "downLeft") {
@@ -72,10 +88,12 @@ export default function Bird({ position }) {
     }
 
     birdDirection.current = "upLeft";
+    setIsJumping(false);
   };
 
   // Jump up right
   const jumpUpRight = () => {
+    setIsJumping(true);
     bird.current.applyImpulse({ x: 0, y: 2.4, z: -0.29 });
 
     if (birdDirection.current === "downLeft") {
@@ -87,34 +105,35 @@ export default function Bird({ position }) {
     }
 
     birdDirection.current = "upRight";
+    setIsJumping(false);
   };
 
   useEffect(() => {
     const unsubscribeJumpDownLeft = subscribeKeys(
       (state) => state.downLeft,
       (value) => {
-        if (value) jumpDownLeft();
+        if (!isJumping && value) jumpDownLeft();
       }
     );
 
     const unsubscribeJumpDownRight = subscribeKeys(
       (state) => state.downRight,
       (value) => {
-        if (value) jumpDownRight();
+        if (!isJumping && value) jumpDownRight();
       }
     );
 
     const unsubscribeJumpUpRight = subscribeKeys(
       (state) => state.upRight,
       (value) => {
-        if (value) jumpUpRight();
+        if (!isJumping && value) jumpUpRight();
       }
     );
 
     const unsubscribeJumpUpLeft = subscribeKeys(
       (state) => state.upLeft,
       (value) => {
-        if (value) jumpUpLeft();
+        if (!isJumping && value) jumpUpLeft();
       }
     );
 
