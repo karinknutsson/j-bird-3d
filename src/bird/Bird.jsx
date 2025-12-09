@@ -8,28 +8,28 @@ const birdMaterial = new THREE.MeshStandardMaterial({ color: "#ffffff" });
 const legMaterial = new THREE.MeshStandardMaterial({ color: "#fc5454" });
 const eyeMaterial = new THREE.MeshStandardMaterial({ color: "#000000" });
 
-const topFeatherGeometry = new THREE.BoxGeometry(0.2, 0.8, 1.6);
+const topFeatherGeometry = new THREE.BoxGeometry(0.2, 0.8, 1);
 const topFeatherMatrix = new THREE.Matrix4();
 topFeatherMatrix.makeShear(0, 0, 0, 0, 0, -0.6);
 topFeatherGeometry.applyMatrix4(topFeatherMatrix);
 
-const bottomFeatherGeometry = new THREE.BoxGeometry(0.2, 0.4, 1.6);
+const bottomFeatherGeometry = new THREE.BoxGeometry(0.2, 0.4, 1);
 const bottomFeatherMatrix = new THREE.Matrix4();
 bottomFeatherMatrix.makeShear(0, 0, 0, 0, 0, -0.2);
 bottomFeatherGeometry.applyMatrix4(bottomFeatherMatrix);
 
-export default function Bird({ position }) {
+export default function Bird({ position, rotation }) {
   return (
-    <group position={position} scale={0.25}>
+    <group position={position} rotation={rotation} scale={0.2}>
       {/* Body*/}
       <mesh
         geometry={sphereGeometry}
         material={birdMaterial}
-        scale={[1, 0.85, 1]}
+        scale={[1, 0.85, 0.85]}
       />
 
       {/* Eyes */}
-      <group position={[0, 0.4, 0.9]}>
+      <group position={[0, 0.4, 0.78]}>
         <mesh
           geometry={sphereGeometry}
           material={eyeMaterial}
@@ -48,13 +48,13 @@ export default function Bird({ position }) {
       <mesh
         geometry={coneGeometry}
         material={legMaterial}
-        position={[0, -0.3, 1.3]}
-        scale={[0.4, 1, 0.4]}
+        position={[0, -0.3, 1.26]}
+        scale={[0.4, 1.2, 0.4]}
         rotation={[Math.PI * 0.6, 0, 0]}
       />
 
       {/* Feathers */}
-      <group position={[0, 0, -1.4]}>
+      <group position={[0, 0.1, -1]}>
         <mesh
           geometry={topFeatherGeometry}
           material={birdMaterial}
@@ -80,21 +80,21 @@ export default function Bird({ position }) {
           material={legMaterial}
           position={[0.17, -1.8, 0.14]}
           scale={[0.1, 0.1, 0.4]}
-          rotation={[0.1, Math.PI * 0.25, 0]}
+          rotation={[0, Math.PI * 0.25, 0]}
         />
         <mesh
           geometry={boxGeometry}
           material={legMaterial}
           position={[0, -1.8, 0.15]}
           scale={[0.1, 0.1, 0.4]}
-          rotation={[0.1, 0, 0]}
+          rotation={[0, 0, 0]}
         />
         <mesh
           geometry={boxGeometry}
           material={legMaterial}
           position={[-0.17, -1.8, 0.14]}
           scale={[0.1, 0.1, 0.4]}
-          rotation={[0.1, -Math.PI * 0.25, 0]}
+          rotation={[0, -Math.PI * 0.25, 0]}
         />
       </group>
 
@@ -111,21 +111,21 @@ export default function Bird({ position }) {
           material={legMaterial}
           position={[0.17, -1.8, 0.14]}
           scale={[0.1, 0.1, 0.4]}
-          rotation={[0.1, Math.PI * 0.25, 0]}
+          rotation={[0, Math.PI * 0.25, 0]}
         />
         <mesh
           geometry={boxGeometry}
           material={legMaterial}
           position={[0, -1.8, 0.15]}
           scale={[0.1, 0.1, 0.4]}
-          rotation={[0.1, 0, 0]}
+          rotation={[0, 0, 0]}
         />
         <mesh
           geometry={boxGeometry}
           material={legMaterial}
           position={[-0.17, -1.8, 0.14]}
           scale={[0.1, 0.1, 0.4]}
-          rotation={[0.1, -Math.PI * 0.25, 0]}
+          rotation={[0, -Math.PI * 0.25, 0]}
         />
       </group>
     </group>

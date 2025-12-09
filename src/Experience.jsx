@@ -17,7 +17,8 @@ export default function Experience() {
 
       <Pyramid />
 
-      <Bird position={[0, 2, 0]} />
+      <Bird position={[0.5, 0.85, 0.56]} />
+      <Bird position={[1, 0.35, 0.62]} rotation={[0, Math.PI, 0]} />
     </>
   );
 }
