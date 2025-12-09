@@ -28,66 +28,62 @@ export default function Bird({ position }) {
   /**
    * Jump functionality
    */
+
+  // Jump down left
   const jumpDownLeft = () => {
-    console.log("current: " + birdDirection.current);
-    console.log("jump down left");
-    bird.current.applyImpulse({ x: 0, y: 0.6, z: 0.135 });
+    bird.current.applyImpulse({ x: 0, y: 1.2, z: 0.39 });
 
     if (birdDirection.current === "downRight") {
-      bird.current.applyTorqueImpulse({ x: 0, y: -0.004, z: 0 });
+      bird.current.applyTorqueImpulse({ x: 0, y: -0.008, z: 0 });
     } else if (birdDirection.current === "upRight") {
-      bird.current.applyTorqueImpulse({ x: 0, y: -0.007, z: 0 });
+      bird.current.applyTorqueImpulse({ x: 0, y: -0.016, z: 0 });
     } else if (birdDirection.current === "upLeft") {
-      1;
-      bird.current.applyTorqueImpulse({ x: 0, y: 0.004, z: 0 });
+      bird.current.applyTorqueImpulse({ x: 0, y: 0.008, z: 0 });
     }
 
     birdDirection.current = "downLeft";
   };
 
+  // Jump down right
   const jumpDownRight = () => {
-    console.log("current: " + birdDirection.current);
-    console.log("jump down right");
-    bird.current.applyImpulse({ x: 0.135, y: 0.6, z: 0 });
+    bird.current.applyImpulse({ x: 0.39, y: 1.2, z: 0 });
 
     if (birdDirection.current === "downLeft") {
-      bird.current.applyTorqueImpulse({ x: 0, y: 0.0035, z: 0 });
+      bird.current.applyTorqueImpulse({ x: 0, y: 0.008, z: 0 });
     } else if (birdDirection.current === "upRight") {
-      bird.current.applyTorqueImpulse({ x: 0, y: -0.004, z: 0 });
+      bird.current.applyTorqueImpulse({ x: 0, y: -0.008, z: 0 });
     } else if (birdDirection.current === "upLeft") {
-      bird.current.applyTorqueImpulse({ x: 0, y: 0.0082, z: 0 });
+      bird.current.applyTorqueImpulse({ x: 0, y: 0.016, z: 0 });
     }
 
     birdDirection.current = "downRight";
   };
 
+  // Jump up left
   const jumpUpLeft = () => {
-    console.log("current: " + birdDirection.current);
-    console.log("jump up left");
-    bird.current.applyImpulse({ x: -0.125, y: 0.9, z: 0 });
+    bird.current.applyImpulse({ x: -0.29, y: 2.4, z: 0 });
 
     if (birdDirection.current === "downLeft") {
-      bird.current.applyTorqueImpulse({ x: 0, y: -0.0035, z: 0 });
+      bird.current.applyTorqueImpulse({ x: 0, y: -0.0064, z: 0 });
     } else if (birdDirection.current === "downRight") {
-      bird.current.applyTorqueImpulse({ x: 0, y: -0.0069, z: 0 });
+      bird.current.applyTorqueImpulse({ x: 0, y: -0.012, z: 0 });
     } else if (birdDirection.current === "upRight") {
-      bird.current.applyTorqueImpulse({ x: 0, y: 0.003, z: 0 });
+      bird.current.applyTorqueImpulse({ x: 0, y: 0.0064, z: 0 });
     }
 
     birdDirection.current = "upLeft";
   };
 
+  // Jump up right
   const jumpUpRight = () => {
-    console.log("current: " + birdDirection.current);
-    console.log("jump up right");
-    bird.current.applyImpulse({ x: 0, y: 0.9, z: -0.125 });
+    bird.current.applyImpulse({ x: 0, y: 2.4, z: -0.29 });
 
     if (birdDirection.current === "downLeft") {
-      bird.current.applyTorqueImpulse({ x: 0, y: 0.0069, z: 0 });
+      bird.current.applyTorqueImpulse({ x: 0, y: 0.012, z: 0 });
     } else if (birdDirection.current === "downRight") {
-      bird.current.applyTorqueImpulse({ x: 0, y: 0.0035, z: 0 });
+      bird.current.applyTorqueImpulse({ x: 0, y: 0.0062, z: 0 });
     } else if (birdDirection.current === "upLeft") {
-      bird.current.applyTorqueImpulse({ x: 0, y: 0.003, z: 0 });
+      bird.current.applyTorqueImpulse({ x: 0, y: -0.0062, z: 0 });
     }
 
     birdDirection.current = "upRight";
@@ -122,18 +118,18 @@ export default function Bird({ position }) {
       }
     );
 
-    // return () => {
-    //   unsubscribeJumpDownLeft();
-    //   unsubscribeJumpDownRight();
-    //   unsubscribeJumpUpRight();
-    //   unsubscribeJumpUpLeft();
-    // };
+    return () => {
+      unsubscribeJumpDownLeft();
+      unsubscribeJumpDownRight();
+      unsubscribeJumpUpRight();
+      unsubscribeJumpUpLeft();
+    };
   }, []);
 
   return (
     <RigidBody ref={bird} colliders={false} canSleep={false}>
       {/* Collider */}
-      <ConeCollider position={position} args={[0.36, 0.169]} mass={0.2} />
+      <ConeCollider position={position} args={[0.36, 0.15]} mass={0.5} />
 
       <group position={position} scale={0.2}>
         {/* Body */}
