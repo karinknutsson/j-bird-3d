@@ -2,6 +2,7 @@ import { ConeCollider, RigidBody } from "@react-three/rapier";
 import * as THREE from "three";
 import { useKeyboardControls } from "@react-three/drei";
 import { useEffect, useRef } from "react";
+import useGame from "../stores/useGame";
 
 /**
  * Geometry
@@ -32,6 +33,8 @@ export default function Bird({ position }) {
   const birdDirection = useRef("downLeft");
   const [subscribeKeys, getKeys] = useKeyboardControls();
   let isJumping = false;
+
+  const start = useGame((state) => state.start);
 
   /**
    * Jump functionality
@@ -116,6 +119,10 @@ export default function Bird({ position }) {
   };
 
   useEffect(() => {
+    const unsubscribeAny = subscribeKeys(() => {
+      start();
+    });
+
     const unsubscribeJumpDownLeft = subscribeKeys(
       (state) => state.downLeft,
       (value) => {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as THREE from "three";
 import { RigidBody, CuboidCollider } from "@react-three/rapier";
+import useGame from "../stores/useGame";
 
 /**
  * Geometry & material
@@ -12,11 +13,13 @@ const touchedMaterial = new THREE.MeshStandardMaterial({ color: "#ffaf40" });
 export default function Cube({ size, position }) {
   const [isTouched, setIsTouched] = useState(false);
 
+  const phase = useGame((state) => state.phase);
+
   /**
    * Change color on hit
    */
   const handleHitCube = () => {
-    setIsTouched(true);
+    if (phase === "playing") setIsTouched(true);
   };
 
   return (
