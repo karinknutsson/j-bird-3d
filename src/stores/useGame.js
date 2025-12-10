@@ -27,6 +27,10 @@ export default create(
       },
 
       /**
+       * Pyramid torque
+       */
+
+      /**
        * Phases
        */
       phase: "ready",

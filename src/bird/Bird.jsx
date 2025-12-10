@@ -152,6 +152,7 @@ export default function Bird({ position }) {
     );
 
     return () => {
+      unsubscribeAny();
       unsubscribeJumpDownLeft();
       unsubscribeJumpDownRight();
       unsubscribeJumpUpRight();
@@ -159,10 +160,20 @@ export default function Bird({ position }) {
     };
   }, []);
 
+  const birdCollision = () => {
+    // console.log(bird.current.translation());
+    const position = bird.current.translation();
+  };
+
   return (
     <RigidBody ref={bird} colliders={false} canSleep={false}>
       {/* Collider */}
-      <CuboidCollider position={position} args={[0.1, 0.35, 0.1]} mass={0.5} />
+      <CuboidCollider
+        position={position}
+        args={[0.1, 0.35, 0.1]}
+        mass={0.5}
+        onCollisionEnter={birdCollision}
+      />
 
       <group position={position} scale={0.2}>
         {/* Body */}

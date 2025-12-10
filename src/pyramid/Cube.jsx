@@ -24,8 +24,6 @@ export default function Cube({ size, position }) {
     if (phase === "playing") {
       if (!isTouched) incrementCubeHits();
       setIsTouched(true);
-
-      console.log(cubeHits);
     }
   };
 
