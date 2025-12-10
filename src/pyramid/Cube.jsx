@@ -14,12 +14,19 @@ export default function Cube({ size, position }) {
   const [isTouched, setIsTouched] = useState(false);
 
   const phase = useGame((state) => state.phase);
+  const incrementCubeHits = useGame((state) => state.incrementCubeHits);
+  const cubeHits = useGame((state) => state.cubeHits);
 
   /**
    * Change color on hit
    */
   const handleHitCube = () => {
-    if (phase === "playing") setIsTouched(true);
+    if (phase === "playing") {
+      if (!isTouched) incrementCubeHits();
+      setIsTouched(true);
+
+      console.log(cubeHits);
+    }
   };
 
   return (

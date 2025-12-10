@@ -4,7 +4,27 @@ import { subscribeWithSelector } from "zustand/middleware";
 export default create(
   subscribeWithSelector((set) => {
     return {
+      /**
+       * Cubes
+       */
       cubeCount: 0,
+      cubeHits: 0,
+
+      setCubeCount: (count) => {
+        set((state) => {
+          return {
+            cubeCount: count,
+          };
+        });
+      },
+
+      incrementCubeHits: () => {
+        set((state) => {
+          return {
+            cubeHits: state.cubeHits + 1,
+          };
+        });
+      },
 
       /**
        * Phases

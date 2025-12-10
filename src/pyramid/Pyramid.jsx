@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import Cube from "./Cube";
+import useGame from "../stores/useGame";
 
 const cubeSize = 0.5;
 
@@ -40,7 +42,15 @@ export function CubeLevel({ level }) {
   );
 }
 
-export default function Pyramid({ levelCount = 5 }) {
+export default function Pyramid({ levelCount = 4 }) {
+  const setCubeCount = useGame((state) => state.setCubeCount);
+  const cubeCount = useGame((state) => state.cubeCount);
+
+  useEffect(() => {
+    const totalCubes = 2 * Math.pow(levelCount, 2) - 2 * levelCount + 1;
+    setCubeCount(totalCubes);
+  }, []);
+
   return (
     <>
       <group position={[0, levelCount * cubeSize * 0.5, 0]}>
