@@ -79,8 +79,11 @@ export default function Bird({ position }) {
   const movementRef = useRef(movement);
   movementRef.current = movement;
 
+  const cameraPositionRef = useRef(cameraPosition);
+  cameraPositionRef.current = cameraPosition;
+
   // Lock / unlock jump
-  const setIsJumping = (value, ms = 800) => {
+  const setIsJumping = (value, ms = 1000) => {
     if (value) {
       isJumping = true;
     } else {
@@ -92,15 +95,20 @@ export default function Bird({ position }) {
 
   // Jump up left
   const jumpUpLeft = () => {
-    // console.log(movementRef.current.upLeft);
     setIsJumping(true);
     const position = birdRef.current.translation();
 
+    // Check if bird is on edge in current zone
+    const birdOnEdge =
+      (cameraPositionRef.current % 2 === 0 &&
+        position.x < 0.3 &&
+        position.x > -0.3) ||
+      (cameraPositionRef.current % 2 === 1 &&
+        position.z < 0.3 &&
+        position.z > -0.3);
+
     // If bird is on edge cube, jump downward
-    if (
-      (position.x < 0.3 && position.x > -0.3) ||
-      (position.z < 0.3 && position.z > -0.3)
-    ) {
+    if (birdOnEdge) {
       birdRef.current.applyImpulse({
         x: movementRef.current.upLeft.x * 1.4,
         y: 1.2,
@@ -123,21 +131,26 @@ export default function Bird({ position }) {
       birdRef.current.applyTorqueImpulse({ x: 0, y: 0.0064, z: 0 });
     }
 
-    birdDirection.current = "upLeft";
+    birdDirection.current = birdOnEdge ? "downLeft" : "upLeft";
     setIsJumping(false, 1150);
   };
 
   // Jump up right
   const jumpUpRight = () => {
-    // console.log(movementRef.current.upRight);
     setIsJumping(true);
     const position = birdRef.current.translation();
 
+    // Check if bird is on edge in current zone
+    const birdOnEdge =
+      (cameraPositionRef.current % 2 === 1 &&
+        position.x < 0.3 &&
+        position.x > -0.3) ||
+      (cameraPositionRef.current % 2 === 0 &&
+        position.z < 0.3 &&
+        position.z > -0.3);
+
     // If bird is on edge cube, jump downward
-    if (
-      (position.x < 0.3 && position.x > -0.3) ||
-      (position.z < 0.3 && position.z > -0.3)
-    ) {
+    if (birdOnEdge) {
       birdRef.current.applyImpulse({
         x: movementRef.current.upRight.x * 1.4,
         y: 1.2,
@@ -151,6 +164,7 @@ export default function Bird({ position }) {
         z: movementRef.current.upRight.z,
       });
     }
+
     if (birdDirection.current === "downLeft") {
       birdRef.current.applyTorqueImpulse({ x: 0, y: 0.012, z: 0 });
     } else if (birdDirection.current === "downRight") {
@@ -159,13 +173,12 @@ export default function Bird({ position }) {
       birdRef.current.applyTorqueImpulse({ x: 0, y: -0.0064, z: 0 });
     }
 
-    birdDirection.current = "upRight";
+    birdDirection.current = birdOnEdge ? "downRight" : "upRight";
     setIsJumping(false, 1150);
   };
 
   // Jump down left
   const jumpDownLeft = () => {
-    // console.log(movementRef.current.downLeft);
     setIsJumping(true);
     birdRef.current.applyImpulse({
       x: movementRef.current.downLeft.x,
@@ -187,7 +200,6 @@ export default function Bird({ position }) {
 
   // Jump down right
   const jumpDownRight = () => {
-    // console.log(movementRef.current.downRight);
     setIsJumping(true);
     birdRef.current.applyImpulse({
       x: movementRef.current.downRight.x,
@@ -255,7 +267,6 @@ export default function Bird({ position }) {
    */
   const birdCollision = () => {
     const position = birdRef.current.translation();
-    console.log("x: " + position.x, ", z: " + position.z);
 
     switch (cameraPosition) {
       case 0:
