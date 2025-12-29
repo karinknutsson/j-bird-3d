@@ -97,7 +97,10 @@ export default function Bird({ position }) {
     const position = birdRef.current.translation();
 
     // If bird is on edge cube, jump downward
-    if (position.x < 0.3 && position.x > -0.3) {
+    if (
+      (position.x < 0.3 && position.x > -0.3) ||
+      (position.z < 0.3 && position.z > -0.3)
+    ) {
       birdRef.current.applyImpulse({
         x: movementRef.current.upLeft.x * 1.4,
         y: 1.2,
@@ -131,7 +134,10 @@ export default function Bird({ position }) {
     const position = birdRef.current.translation();
 
     // If bird is on edge cube, jump downward
-    if (position.z < 0.3 && position.z > -0.3) {
+    if (
+      (position.x < 0.3 && position.x > -0.3) ||
+      (position.z < 0.3 && position.z > -0.3)
+    ) {
       birdRef.current.applyImpulse({
         x: movementRef.current.upRight.x * 1.4,
         y: 1.2,
