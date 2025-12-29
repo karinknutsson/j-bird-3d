@@ -51,17 +51,6 @@ export default function Pyramid({ levelCount = 4 }) {
   useEffect(() => {
     const totalCubes = 2 * Math.pow(levelCount, 2) - 2 * levelCount + 1;
     setCubeCount(totalCubes);
-
-    // const unsubscribeTorqueDirection = useGame.subscribe(
-    //   (state) => state.torqueDirection,
-    //   (direction) => {
-    //     if (!direction) return;
-    //   }
-    // );
-
-    // return () => {
-    //   unsubscribeTorqueDirection();
-    // };
   }, []);
 
   return (
