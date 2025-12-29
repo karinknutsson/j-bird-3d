@@ -179,9 +179,9 @@ export default function Bird({ position }) {
     console.log("x: " + position.x, ", z: " + position.z);
 
     if (position.x < -0.35) {
-      moveCamera("counterClockwise");
-    } else if (position.z < -0.35) {
       moveCamera("clockwise");
+    } else if (position.z < -0.35) {
+      moveCamera("counterClockwise");
     }
   };
 
