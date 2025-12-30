@@ -28,7 +28,6 @@ export default function Cube({ size, position }) {
   };
 
   return (
-    // <RigidBody type="fixed" friction={0.5} colliders={false}>
     <>
       {/* Collider */}
       <CuboidCollider
@@ -45,6 +44,5 @@ export default function Cube({ size, position }) {
         position={position}
       ></mesh>
     </>
-    // </RigidBody>
   );
 }
