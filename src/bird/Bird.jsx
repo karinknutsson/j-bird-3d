@@ -83,7 +83,7 @@ export default function Bird({ position }) {
   cameraPositionRef.current = cameraPosition;
 
   // Lock / unlock jump
-  const setIsJumping = (value, ms = 1000) => {
+  const setIsJumping = (value, ms = 800) => {
     if (value) {
       isJumping = true;
     } else {
@@ -132,7 +132,7 @@ export default function Bird({ position }) {
     }
 
     birdDirection.current = birdOnEdge ? "downLeft" : "upLeft";
-    setIsJumping(false, 1150);
+    setIsJumping(false, 900);
   };
 
   // Jump up right
@@ -174,7 +174,7 @@ export default function Bird({ position }) {
     }
 
     birdDirection.current = birdOnEdge ? "downRight" : "upRight";
-    setIsJumping(false, 1150);
+    setIsJumping(false, 900);
   };
 
   // Jump down left
@@ -301,8 +301,16 @@ export default function Bird({ position }) {
   };
 
   return (
-    <RigidBody ref={birdRef} colliders={false} canSleep={false}>
-      {/* Collider */}
+    <RigidBody
+      ref={birdRef}
+      colliders={false}
+      canSleep={false}
+      angularDamping={1}
+      enabledRotations={[false, true, false]}
+      friction={1}
+      restitution={0}
+    >
+      {/* Bird collider */}
       <CuboidCollider
         position={position}
         args={[0.1, 0.35, 0.1]}
@@ -311,7 +319,7 @@ export default function Bird({ position }) {
       />
 
       <group position={position} scale={0.2}>
-        {/* Body */}
+        {/* Bird body */}
         <mesh
           geometry={sphereGeometry}
           material={birdMaterial}
