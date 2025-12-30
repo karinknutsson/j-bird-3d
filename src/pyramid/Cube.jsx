@@ -31,6 +31,7 @@ export default function Cube({ size, position }) {
         onCollisionEnter={handleHitCube}
         args={[0.25, 0.25, 0.25]}
         position={position}
+        friction={1.5}
       />
 
       {/* Cube mesh */}

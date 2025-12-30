@@ -301,7 +301,15 @@ export default function Bird({ position }) {
   };
 
   return (
-    <RigidBody ref={birdRef} colliders={false} canSleep={false}>
+    <RigidBody
+      ref={birdRef}
+      colliders={false}
+      canSleep={false}
+      angularDamping={1}
+      enabledRotations={[false, true, false]}
+      friction={1}
+      restitution={0}
+    >
       {/* Bird collider */}
       <CuboidCollider
         position={position}
