@@ -83,7 +83,7 @@ export default function Bird({ position }) {
   cameraPositionRef.current = cameraPosition;
 
   // Lock / unlock jump
-  const setIsJumping = (value, ms = 1000) => {
+  const setIsJumping = (value, ms = 800) => {
     if (value) {
       isJumping = true;
     } else {
@@ -132,7 +132,7 @@ export default function Bird({ position }) {
     }
 
     birdDirection.current = birdOnEdge ? "downLeft" : "upLeft";
-    setIsJumping(false, 1150);
+    setIsJumping(false, 900);
   };
 
   // Jump up right
@@ -174,7 +174,7 @@ export default function Bird({ position }) {
     }
 
     birdDirection.current = birdOnEdge ? "downRight" : "upRight";
-    setIsJumping(false, 1150);
+    setIsJumping(false, 900);
   };
 
   // Jump down left
