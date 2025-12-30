@@ -22,7 +22,11 @@ export default function Lights() {
 
   return (
     <>
-      <directionalLight ref={lightRef} position={[-4, 4, 1]} intensity={4.5} />
+      <directionalLight
+        ref={lightRef}
+        position={lightPositions[0]}
+        intensity={4.5}
+      />
       <ambientLight intensity={1.5} />
     </>
   );
