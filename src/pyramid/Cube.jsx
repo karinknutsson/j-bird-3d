@@ -14,16 +14,21 @@ export default function Cube({ size, position }) {
   const [isTouched, setIsTouched] = useState(false);
 
   const phase = useGame((state) => state.phase);
+  const incrementCubeHits = useGame((state) => state.incrementCubeHits);
+  const cubeHits = useGame((state) => state.cubeHits);
 
   /**
    * Change color on hit
    */
   const handleHitCube = () => {
-    if (phase === "playing") setIsTouched(true);
+    if (phase === "playing") {
+      if (!isTouched) incrementCubeHits();
+      setIsTouched(true);
+    }
   };
 
   return (
-    <RigidBody type="fixed" friction={0.5} colliders={false}>
+    <>
       {/* Collider */}
       <CuboidCollider
         onCollisionEnter={handleHitCube}
@@ -38,6 +43,6 @@ export default function Cube({ size, position }) {
         scale={[size, size, size]}
         position={position}
       ></mesh>
-    </RigidBody>
+    </>
   );
 }
