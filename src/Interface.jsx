@@ -2,13 +2,24 @@ import useGame from "./stores/useGame";
 import BirdMesh from "./bird/BirdMesh";
 
 export default function Interface() {
-  const extraLives = useGame((state) => state.extraLives);
+  const { cameraPosition, extraLives, extraLivesPositions } = useGame();
 
   return (
     <>
-      {[...Array(extraLives)].map((life, index) => {
-        return <BirdMesh key={index} position={[0, 4 - index, 0]} />;
-      })}
+      <group position={[0, 3, 0]}>
+        {[...Array(extraLives)].map((life, index) => {
+          return (
+            <BirdMesh
+              key={index}
+              position={[
+                extraLivesPositions[cameraPosition].x * index * 0.5,
+                0,
+                extraLivesPositions[cameraPosition].z * index * 0.5,
+              ]}
+            />
+          );
+        })}
+      </group>
     </>
   );
 }

@@ -119,6 +119,13 @@ export default create(
        */
       extraLives: 2,
 
+      extraLivesPositions: [
+        new THREE.Vector3(-1, 0, 1),
+        new THREE.Vector3(-1, 0, -1),
+        new THREE.Vector3(1, 0, -1),
+        new THREE.Vector3(1, 0, 1),
+      ],
+
       decrementExtraLives: () => {
         set((state) => {
           return {
