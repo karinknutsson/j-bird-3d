@@ -30,7 +30,6 @@ export default create(
       /**
        * Camera
        */
-
       isCameraMoving: false,
       cameraPosition: 0,
 
@@ -112,6 +111,19 @@ export default create(
             };
 
           return {};
+        });
+      },
+
+      /**
+       * Lives
+       */
+      extraLives: 2,
+
+      decrementExtraLives: () => {
+        set((state) => {
+          return {
+            extraLives: state.extraLives - 1,
+          };
         });
       },
     };
