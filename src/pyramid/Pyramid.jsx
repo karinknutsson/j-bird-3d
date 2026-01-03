@@ -62,8 +62,9 @@ export function GroundLevel({ level }) {
 }
 
 export default function Pyramid({ levelCount = 4 }) {
-  const setCubeCount = useGame((state) => state.setCubeCount);
   const pyramidRef = useRef();
+  const { setCubeCount, cameraPosition, extraLives, extraLivesPositions } =
+    useGame();
 
   useEffect(() => {
     const totalCubes = 2 * Math.pow(levelCount, 2) - 2 * levelCount + 1;
@@ -86,7 +87,31 @@ export default function Pyramid({ levelCount = 4 }) {
         </group>
       </RigidBody>
 
-      <Bird position={[0, 1.7, 0]} />
+      {[...Array(extraLives)].map((life, index) => {
+        return (
+          <Bird
+            key={index}
+            type={"fixed"}
+            position={[
+              extraLivesPositions[cameraPosition].x * index * 0.4,
+              3,
+              extraLivesPositions[cameraPosition].z * index * 0.4,
+            ]}
+            scale={0.14}
+          />
+          // <BirdMesh
+          //   key={index}
+          //   position={[
+          //     extraLivesPositions[cameraPosition].x * index * 0.4,
+          //     0,
+          //     extraLivesPositions[cameraPosition].z * index * 0.4,
+          //   ]}
+          //   scale={0.14}
+          // />
+        );
+      })}
+
+      <Bird type={"dynamic"} position={[0, 1.7, 0]} scale={0.2} />
     </>
   );
 }

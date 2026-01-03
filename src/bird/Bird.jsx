@@ -1,10 +1,11 @@
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useKeyboardControls } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useMemo } from "react";
 import useGame from "../stores/useGame";
 import BirdMesh from "./BirdMesh";
 
-export default function Bird({ position }) {
+export default function Bird({ type, position, scale }) {
   const birdRef = useRef();
 
   const birdDirection = useRef("downLeft");
@@ -276,6 +277,14 @@ export default function Bird({ position }) {
     }
   };
 
+  function handleDeath() {
+    console.log("die");
+  }
+
+  useFrame(() => {
+    if (birdRef && birdRef.current.translation().y < -6) handleDeath();
+  });
+
   return (
     <RigidBody
       ref={birdRef}
@@ -285,6 +294,7 @@ export default function Bird({ position }) {
       enabledRotations={[false, true, false]}
       friction={1}
       restitution={0}
+      type={type}
     >
       {/* Bird collider */}
       <CuboidCollider
@@ -295,7 +305,7 @@ export default function Bird({ position }) {
       />
 
       {/* Bird mesh */}
-      <BirdMesh position={position} scale={0.2} />
+      <BirdMesh position={position} scale={scale} />
     </RigidBody>
   );
 }

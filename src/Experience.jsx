@@ -11,7 +11,7 @@ export default function Experience() {
 
       {/* <Physics debug> */}
       <Physics>
-        <Interface />
+        {/* <Interface /> */}
         <Lights />
         <Pyramid />
       </Physics>
