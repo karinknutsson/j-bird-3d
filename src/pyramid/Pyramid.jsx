@@ -3,6 +3,8 @@ import Cube from "./Cube";
 import useGame from "../stores/useGame";
 import { RigidBody, CuboidCollider } from "@react-three/rapier";
 import Bird from "../bird/Bird";
+import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
 
 const cubeSize = 0.5;
 
@@ -44,11 +46,10 @@ export function CubeLevel({ level }) {
   );
 }
 
-export function BirdGround({ position }) {
+export function BirdGround({ groundRef }) {
   return (
-    <RigidBody type="fixed" colliders={false}>
+    <RigidBody ref={groundRef} type="kinematicPosition" colliders={false}>
       <CuboidCollider
-        position={position}
         args={[cubeSize * 0.3, 0.02, cubeSize * 0.3]}
         mass={0.5}
       />
@@ -60,22 +61,81 @@ export default function Pyramid({ levelCount = 4 }) {
   const pyramidRef = useRef();
   const { setCubeCount, cameraPosition, livesPositions } = useGame();
 
-  useEffect(() => {
-    const totalCubes = 2 * Math.pow(levelCount, 2) - 2 * levelCount + 1;
-    setCubeCount(totalCubes);
-  }, []);
-
-  const birdRefs = useRef([]);
+  const birdGroup = useRef();
   const [activeIndex, setActiveIndex] = useState(null);
   const [lives, setLives] = useState(3);
+  const [isMoving, setIsMoving] = useState(false);
+  const [positions, setPositions] = useState([]);
+  const [targetPositions, setTargetPositions] = useState([]);
+  const groundRefs = useRef([]);
 
   function handleAwake(index) {
     setActiveIndex(index);
+    setIsMoving(true);
   }
 
   function handleDeath() {
     setLives((l) => l - 1);
   }
+
+  useFrame((_, delta) => {
+    if (!isMoving) return;
+
+    for (let i = activeIndex - 1; i > -1; i--) {
+      const position = positions[i];
+
+      position.x = THREE.MathUtils.lerp(
+        position.x,
+        targetPositions[i].x,
+        delta
+      );
+      position.y = THREE.MathUtils.lerp(
+        position.y,
+        targetPositions[i].y,
+        delta
+      );
+      position.z = THREE.MathUtils.lerp(
+        position.z,
+        targetPositions[i].z,
+        delta
+      );
+
+      groundRefs.current[i].setNextKinematicTranslation({
+        x: position.x,
+        y: position.y,
+        z: position.z,
+      });
+    }
+  });
+
+  useEffect(() => {
+    const totalCubes = 2 * Math.pow(levelCount, 2) - 2 * levelCount + 1;
+    setCubeCount(totalCubes);
+
+    let currentPositions = [];
+
+    for (let i = 0; i < lives; i++) {
+      currentPositions[i] = {
+        x: livesPositions[cameraPosition].x * cubeSize * (lives - i - 1),
+        y: 2.4,
+        z: livesPositions[cameraPosition].z * cubeSize * (lives - i - 1),
+      };
+    }
+
+    setPositions(currentPositions);
+
+    let targets = [];
+
+    for (let i = 0; i < lives - 1; i++) {
+      targets[i] = {
+        x: livesPositions[cameraPosition].x * cubeSize * (lives - i - 2),
+        y: 2.4,
+        z: livesPositions[cameraPosition].z * cubeSize * (lives - i - 2),
+      };
+    }
+
+    setTargetPositions(targets);
+  }, [cameraPosition]);
 
   return (
     <>
@@ -87,42 +147,39 @@ export default function Pyramid({ levelCount = 4 }) {
         </group>
       </RigidBody>
 
-      <group position={[0, 4, 0]}>
-        {[...Array(lives)].map((e, index) => {
-          const inactive = activeIndex !== index;
+      {positions[0] && (
+        <group ref={birdGroup} position={[0, 3, 0]}>
+          {[...Array(lives)].map((e, index) => {
+            const inactive = activeIndex !== index;
 
-          return (
-            <group
-              key={index}
-              position={[
-                livesPositions[cameraPosition].x *
-                  cubeSize *
-                  (lives - index - 1),
-                -0.6,
-                livesPositions[cameraPosition].z *
-                  cubeSize *
-                  (lives - index - 1),
-              ]}
-            >
-              {inactive && (
-                <BirdGround
-                  position={[0, -0.6, 0]}
-                  args={[cubeSize * 0.3, 0.02, cubeSize * 0.3]}
+            return (
+              <group
+                key={index}
+                position={[positions[index].x, 0, positions[index].z]}
+              >
+                {inactive && (
+                  <group position={[0, -0.6, 0]}>
+                    <BirdGround
+                      groundRef={(e) => (groundRefs.current[index] = e)}
+                      position={[0, -0.6, 0]}
+                      args={[cubeSize * 0.3, 0.02, cubeSize * 0.3]}
+                    />
+                  </group>
+                )}
+
+                <Bird
+                  id={index}
+                  position={[0, 0, 0]}
+                  scale={inactive ? 0.14 : 0.2}
+                  active={!inactive}
+                  onAwake={() => handleAwake(index)}
+                  onDie={handleDeath}
                 />
-              )}
-
-              <Bird
-                id={index}
-                position={[0, 0, 0]}
-                scale={inactive ? 0.14 : 0.2}
-                active={!inactive}
-                onAwake={() => handleAwake(index)}
-                onDie={handleDeath}
-              />
-            </group>
-          );
-        })}
-      </group>
+              </group>
+            );
+          })}
+        </group>
+      )}
     </>
   );
 }
