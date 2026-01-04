@@ -48,7 +48,12 @@ export function CubeLevel({ level }) {
 
 export function BirdGround({ groundRef }) {
   return (
-    <RigidBody ref={groundRef} type="kinematicPosition" colliders={false}>
+    <RigidBody
+      ref={groundRef}
+      type="kinematicPosition"
+      colliders={false}
+      friction={2}
+    >
       <CuboidCollider
         args={[cubeSize * 0.3, 0.02, cubeSize * 0.3]}
         mass={0.5}
@@ -87,17 +92,17 @@ export default function Pyramid({ levelCount = 4 }) {
       position.x = THREE.MathUtils.lerp(
         position.x,
         targetPositions[i].x,
-        delta
+        delta * 2
       );
       position.y = THREE.MathUtils.lerp(
         position.y,
         targetPositions[i].y,
-        delta
+        delta * 2
       );
       position.z = THREE.MathUtils.lerp(
         position.z,
         targetPositions[i].z,
-        delta
+        delta * 2
       );
 
       groundRefs.current[i].setNextKinematicTranslation({

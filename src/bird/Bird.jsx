@@ -296,7 +296,7 @@ export default function Bird({ id, position, scale, onAwake, onDie, active }) {
       canSleep={false}
       angularDamping={1}
       enabledRotations={[false, true, false]}
-      friction={1}
+      friction={2}
       restitution={0}
       type="dynamic"
     >
