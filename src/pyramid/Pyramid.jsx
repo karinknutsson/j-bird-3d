@@ -81,7 +81,6 @@ export default function Pyramid({ levelCount = 4 }) {
   useEffect(() => {
     setTimeout(() => {
       setIsMoving(true);
-      // setActiveIndex((index) => index - 1);
     }, 400);
   }, []);
 
@@ -91,10 +90,15 @@ export default function Pyramid({ levelCount = 4 }) {
   }
 
   function handleDeath() {
-    setLives((lives) => lives - 1);
+    console.log("die");
+    setActiveIndex((index) => index - 1);
+    setActivePosition(null);
+    setTimeout(() => {
+      setIsMoving(true);
+    }, 400);
   }
 
-  function isRoughlyEqual(a, b, epsilon = 0.01) {
+  function areRoughlyEqual(a, b, epsilon = 0.01) {
     return Math.abs(a - b) < epsilon;
   }
 
@@ -126,7 +130,7 @@ export default function Pyramid({ levelCount = 4 }) {
         z: position.z,
       });
 
-      if (isRoughlyEqual(position.x, targetPositions[i].x)) {
+      if (areRoughlyEqual(position.x, targetPositions[i].x)) {
         setPositions((prev) =>
           prev.map((pos, index) =>
             i === index
