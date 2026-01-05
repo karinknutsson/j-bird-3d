@@ -5,7 +5,14 @@ import { useEffect, useRef, useMemo } from "react";
 import useGame from "../stores/useGame";
 import BirdMesh from "./BirdMesh";
 
-export default function Bird({ id, position, scale, onAwake, onDie, active }) {
+export default function Bird({
+  position,
+  scale,
+  active,
+  onAwake,
+  onDie,
+  lastIndex,
+}) {
   const birdRef = useRef();
 
   const birdDirection = useRef("downLeft");
@@ -198,9 +205,7 @@ export default function Bird({ id, position, scale, onAwake, onDie, active }) {
 
   // Subscribe to jump keys
   useEffect(() => {
-    if (id === 2) {
-      setTimeout(onAwake, 1000);
-    }
+    if (lastIndex) setTimeout(onAwake, 1000);
 
     if (!active) return;
 

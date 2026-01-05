@@ -68,7 +68,7 @@ export default function Pyramid({ levelCount = 4 }) {
 
   const birdGroup = useRef();
   const [activeIndex, setActiveIndex] = useState(null);
-  const [lives, setLives] = useState(3);
+  const [lives, setLives] = useState(6);
   const [isMoving, setIsMoving] = useState(false);
   const [positions, setPositions] = useState([]);
   const [targetPositions, setTargetPositions] = useState([]);
@@ -76,11 +76,17 @@ export default function Pyramid({ levelCount = 4 }) {
 
   function handleAwake(index) {
     setActiveIndex(index);
-    setIsMoving(true);
+    setTimeout(() => {
+      setIsMoving(true);
+    }, 400);
   }
 
   function handleDeath() {
-    setLives((l) => l - 1);
+    setLives((lives) => lives - 1);
+  }
+
+  function roughlyEqual(a, b, epsilon = 0.01) {
+    return Math.abs(a - b) < epsilon;
   }
 
   useFrame((_, delta) => {
@@ -110,6 +116,17 @@ export default function Pyramid({ levelCount = 4 }) {
         y: position.y,
         z: position.z,
       });
+
+      if (roughlyEqual(position.x, targetPositions[i].x)) {
+        setPositions((prev) =>
+          prev.map((pos, index) => (i === index ? position : pos))
+        );
+        setIsMoving(false);
+        console.log("false");
+        console.log(
+          "index: " + i + " position: " + position.x + ", " + position.z
+        );
+      }
     }
   });
 
@@ -154,7 +171,7 @@ export default function Pyramid({ levelCount = 4 }) {
 
       {positions[0] && (
         <group ref={birdGroup} position={[0, 3, 0]}>
-          {[...Array(lives)].map((e, index) => {
+          {[...Array(lives)].map((_, index) => {
             const inactive = activeIndex !== index;
 
             return (
@@ -173,12 +190,12 @@ export default function Pyramid({ levelCount = 4 }) {
                 )}
 
                 <Bird
-                  id={index}
                   position={[0, 0, 0]}
                   scale={inactive ? 0.14 : 0.2}
                   active={!inactive}
                   onAwake={() => handleAwake(index)}
                   onDie={handleDeath}
+                  lastIndex={index === lives - 1}
                 />
               </group>
             );
