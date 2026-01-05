@@ -5,6 +5,8 @@ import { RigidBody, CuboidCollider } from "@react-three/rapier";
 import Bird from "../bird/Bird";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import InactiveBird from "../bird/InactiveBird";
+import ActiveBird from "../bird/ActiveBird";
 
 const cubeSize = 0.5;
 
@@ -67,19 +69,25 @@ export default function Pyramid({ levelCount = 4 }) {
   const { setCubeCount, cameraPosition, livesPositions } = useGame();
 
   const birdGroup = useRef();
-  const [activeIndex, setActiveIndex] = useState(null);
   const [lives, setLives] = useState(6);
+  const [activeIndex, setActiveIndex] = useState(lives - 1);
+  const [activePosition, setActivePosition] = useState();
   const [isMoving, setIsMoving] = useState(false);
   const [positions, setPositions] = useState([]);
   const [targetPositions, setTargetPositions] = useState([]);
   const groundRefs = useRef([]);
   const livesPositionY = 3.4;
 
-  function handleAwake(index) {
-    setActiveIndex(index);
+  useEffect(() => {
     setTimeout(() => {
       setIsMoving(true);
+      // setActiveIndex((index) => index - 1);
     }, 400);
+  }, []);
+
+  function handleAwake(index, position) {
+    setLives((lives) => lives - 1);
+    setActivePosition(position);
   }
 
   function handleDeath() {
@@ -197,12 +205,9 @@ export default function Pyramid({ levelCount = 4 }) {
                   </group>
                 )}
 
-                <Bird
+                <InactiveBird
                   scale={inactive ? 0.14 : 0.2}
-                  active={!inactive}
-                  onAwake={() => handleAwake(index)}
-                  onDie={handleDeath}
-                  lastIndex={index === lives - 1}
+                  onAwake={(position) => handleAwake(index, position)}
                 />
               </group>
             );
