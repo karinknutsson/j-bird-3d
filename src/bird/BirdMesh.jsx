@@ -24,9 +24,9 @@ const birdMaterial = new THREE.MeshStandardMaterial({ color: "#ffffff" });
 const detailMaterial = new THREE.MeshStandardMaterial({ color: "#fc5454" });
 const eyeMaterial = new THREE.MeshStandardMaterial({ color: "#000000" });
 
-export default function BirdMesh({ position, scale }) {
+export default function BirdMesh({ scale }) {
   return (
-    <group position={position} scale={scale}>
+    <group scale={scale}>
       {/* Bird body */}
       <mesh
         geometry={sphereGeometry}

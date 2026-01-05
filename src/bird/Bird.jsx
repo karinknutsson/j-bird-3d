@@ -5,14 +5,7 @@ import { useEffect, useRef, useMemo } from "react";
 import useGame from "../stores/useGame";
 import BirdMesh from "./BirdMesh";
 
-export default function Bird({
-  position,
-  scale,
-  active,
-  onAwake,
-  onDie,
-  lastIndex,
-}) {
+export default function Bird({ scale, active, onAwake, onDie, lastIndex }) {
   const birdRef = useRef();
 
   const birdDirection = useRef("downLeft");
@@ -307,14 +300,13 @@ export default function Bird({
     >
       {/* Bird collider */}
       <CuboidCollider
-        position={position}
         args={[0.1, 0.35, 0.1]}
         mass={0.5}
         onCollisionEnter={birdCollision}
       />
 
       {/* Bird mesh */}
-      <BirdMesh position={position} scale={scale} />
+      <BirdMesh scale={scale} />
     </RigidBody>
   );
 }

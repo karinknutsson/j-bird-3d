@@ -120,12 +120,22 @@ export default function Pyramid({ levelCount = 4 }) {
 
       if (isRoughlyEqual(position.x, targetPositions[i].x)) {
         setPositions((prev) =>
-          prev.map((pos, index) => (i === index ? position : pos))
+          prev.map((pos, index) =>
+            i === index
+              ? {
+                  x: targetPositions[i].x,
+                  y: targetPositions[i].y,
+                  z: targetPositions[i].z,
+                }
+              : pos
+          )
         );
-        setIsMoving(false);
+
         console.log(
           "index: " + i + " position: " + position.x + ", " + position.z
         );
+
+        if (i === 0) setIsMoving(false);
       }
     }
   });
@@ -174,11 +184,13 @@ export default function Pyramid({ levelCount = 4 }) {
           {[...Array(lives)].map((_, index) => {
             const inactive = activeIndex !== index;
 
+            const x =
+              livesPositions[cameraPosition].x * cubeSize * (lives - index - 1);
+            const z =
+              livesPositions[cameraPosition].z * cubeSize * (lives - index - 1);
+
             return (
-              <group
-                key={index}
-                position={[positions[index].x, 0, positions[index].z]}
-              >
+              <group key={index} position={[x, 0, z]}>
                 {inactive && (
                   <group position={[0, -0.6, 0]}>
                     <BirdGround
@@ -190,7 +202,6 @@ export default function Pyramid({ levelCount = 4 }) {
                 )}
 
                 <Bird
-                  position={[0, 0, 0]}
                   scale={inactive ? 0.14 : 0.2}
                   active={!inactive}
                   onAwake={() => handleAwake(index)}
