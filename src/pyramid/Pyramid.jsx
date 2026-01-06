@@ -79,27 +79,18 @@ export default function Pyramid({ levelCount = 4 }) {
   const groundRefs = useRef([]);
   const livesPositionY = 3.4;
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsMoving(true);
-      console.log("isMoving has been set to true");
-      console.log("-> animation starts");
-    }, 2400);
-  }, []);
-
   function handleAwake(index, position) {
     setLivesUsed((lives) => lives + 1);
     setLives((lives) => lives - 1);
     setActivePosition(position);
     console.log("handle awake has been triggered");
+    setIsMoving(true);
+    console.log("isMoving has been set to true");
   }
 
   function handleDeath() {
     setActiveIndex((index) => index - 1);
     setActivePosition(null);
-    setTimeout(() => {
-      setIsMoving(true);
-    }, 400);
   }
 
   function areRoughlyEqual(a, b, epsilon = 0.01) {
