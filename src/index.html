@@ -73,18 +73,15 @@
     </div>
 
     <div class="mobile-interface">
-      <div class="top">
+      <div class="mobile-interface-top">
         <h1>K·BIRD</h1>
-      </div>
 
-      <div class="mobile-interface-center">
         <div class="level-wrapper">
           <div class="level-container">
             <div class="level-label">LEVEL</div>
-            <div class="level-value">1</div>
+            <div class="level-value-mobile">1</div>
           </div>
         </div>
-        <div class="extralives-container-mobile"></div>
       </div>
 
       <div class="mobile-interface-bottom">
@@ -95,26 +92,25 @@
           >
             <img class="arrow-image up-left" src="./arrow-insert.png" />
           </button>
-
-          <button
-            class="arrow-image-wrapper"
-            onclick="window.triggerKey('upRight')"
-          >
-            <img class="arrow-image up-right" src="./arrow-insert.png" />
-          </button>
-        </div>
-
-        <div class="mobile-buttons bottom">
           <button
             class="arrow-image-wrapper"
             onclick="window.triggerKey('downLeft')"
           >
             <img class="arrow-image down-left" src="./arrow-insert.png" />
           </button>
-          <div class="score-container">
-            <div class="score-label">SCORE:</div>
-            <div class="score-value">0</div>
-          </div>
+        </div>
+        <div class="score-container">
+          <div class="score-label">SCORE:</div>
+          <div class="score-value-mobile">0</div>
+        </div>
+
+        <div class="mobile-buttons">
+          <button
+            class="arrow-image-wrapper"
+            onclick="window.triggerKey('upRight')"
+          >
+            <img class="arrow-image up-right" src="./arrow-insert.png" />
+          </button>
           <button
             class="arrow-image-wrapper"
             onclick="window.triggerKey('downRight')"
@@ -124,6 +120,8 @@
         </div>
       </div>
     </div>
+
+    <div class="extralives-container-mobile"></div>
 
     <div class="game-over-container">
       <div class="game-over-text-wrapper">GAME OVER</div>

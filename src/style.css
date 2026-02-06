@@ -201,52 +201,59 @@ button {
   font-size: 3.6rem;
 }
 
-.mobile-interface {
+.mobile-interface,
+.extralives-container-mobile {
   display: none;
 }
 
 @media (max-width: 1024px) {
   h1 {
-    font-size: 2.6rem;
+    font-size: 2.4rem;
     margin: 0;
-  }
-
-  .top {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
   }
 
   .score-container {
     font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .score-value-mobile {
+    font-size: 1.6rem;
+  }
+
+  .mobile-interface-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 16px;
   }
 
   .mobile-interface-bottom {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .mobile-interface-center {
-    display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
   }
 
   .level-container {
     font-size: 1rem;
-    transform: translateX(-50%) rotate(-90deg);
   }
 
   .extralives-container-mobile {
-    width: 64px;
+    position: absolute;
+    top: 112px;
+    right: 24px;
+    width: 48px;
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
-    gap: 12px;
+    gap: 6px;
   }
 
   .extralife-image {
@@ -268,15 +275,14 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 32px;
+    padding: 24px;
     box-sizing: border-box;
   }
 
   .mobile-buttons {
-    width: 100%;
     display: flex;
-
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 24px;
   }
 
   .bottom {

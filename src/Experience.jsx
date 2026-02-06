@@ -55,11 +55,17 @@ export default function Experience() {
   useEffect(() => {
     const scoreValue = document.querySelector(".score-value");
     if (scoreValue) scoreValue.textContent = score;
+
+    const scoreValueMobile = document.querySelector(".score-value-mobile");
+    if (scoreValueMobile) scoreValueMobile.textContent = score;
   }, [score]);
 
   useEffect(() => {
     const levelValue = document.querySelector(".level-value");
     if (levelValue) levelValue.textContent = currentLevel;
+
+    const levelValueMobile = document.querySelector(".level-value-mobile");
+    if (levelValueMobile) levelValueMobile.textContent = currentLevel;
   }, [currentLevel]);
 
   useEffect(() => {

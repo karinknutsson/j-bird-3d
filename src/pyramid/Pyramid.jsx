@@ -68,22 +68,21 @@ export default function Pyramid() {
 
   useEffect(() => {
     const extralivesContainer = document.querySelector(".extralives-container");
-    extralivesContainer.innerHTML = "";
+    if (extralivesContainer) extralivesContainer.innerHTML = "";
 
     const extralivesContainerMobile = document.querySelector(
       ".extralives-container-mobile",
     );
-    extralivesContainerMobile.innerHTML = "";
+    if (extralivesContainerMobile) extralivesContainerMobile.innerHTML = "";
 
     for (let i = 0; i < lives - 1; i++) {
       const lifeDiv = document.createElement("div");
       lifeDiv.className = "extralife-wrapper";
       lifeDiv.innerHTML = `<img src="./jbirdicon.png" class="extralife-image" />`;
-      extralivesContainer.appendChild(lifeDiv);
-      extralivesContainerMobile.appendChild(lifeDiv);
+      if (extralivesContainer) extralivesContainer.appendChild(lifeDiv);
+      if (extralivesContainerMobile)
+        extralivesContainerMobile.appendChild(lifeDiv);
     }
-
-    console.log(extralivesContainer.innerHTML);
   }, [lives]);
 
   useEffect(() => {
