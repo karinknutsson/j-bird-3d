@@ -294,18 +294,26 @@ export default function ActiveBird({ onDie }) {
   // Jump buttons for mobile
   window.triggerKey = (name) => {
     if (name === "downLeft") {
+      start();
+
       if (isJumpingRef.current) queueJump("downLeft");
       else jumpDownLeft();
     }
     if (name === "downRight") {
+      start();
+
       if (isJumpingRef.current) queueJump("downRight");
       else jumpDownRight();
     }
     if (name === "upLeft") {
+      start();
+
       if (isJumpingRef.current) queueJump("upLeft");
       else jumpUpLeft();
     }
     if (name === "upRight") {
+      start();
+
       if (isJumpingRef.current) queueJump("upRight");
       else jumpUpRight();
     }
