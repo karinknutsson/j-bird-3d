@@ -229,4 +229,9 @@ button {
     display: flex;
     justify-content: space-between;
   }
+
+  .game-over-text-wrapper,
+  .level-won-text-wrapper {
+    font-size: 2rem;
+  }
 }
