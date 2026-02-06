@@ -190,3 +190,9 @@ h1 {
   font-family: "Sixtyfour", monospace;
   font-size: 3.6rem;
 }
+
+@media (max-width: 768px) {
+  .desktop {
+    display: none !important;
+  }
+}
