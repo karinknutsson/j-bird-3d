@@ -1,7 +1,7 @@
 import { CapsuleCollider, RigidBody } from "@react-three/rapier";
 import { useKeyboardControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useEffect, useRef, useMemo, use } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import useGame from "../stores/useGame";
 import BirdMesh from "./BirdMesh";
 import * as THREE from "three";
@@ -290,6 +290,34 @@ export default function ActiveBird({ onDie }) {
       unsubscribeJumpUpLeft();
     };
   }, []);
+
+  // Jump buttons for mobile
+  window.triggerKey = (name) => {
+    if (name === "downLeft") {
+      start();
+
+      if (isJumpingRef.current) queueJump("downLeft");
+      else jumpDownLeft();
+    }
+    if (name === "downRight") {
+      start();
+
+      if (isJumpingRef.current) queueJump("downRight");
+      else jumpDownRight();
+    }
+    if (name === "upLeft") {
+      start();
+
+      if (isJumpingRef.current) queueJump("upLeft");
+      else jumpUpLeft();
+    }
+    if (name === "upRight") {
+      start();
+
+      if (isJumpingRef.current) queueJump("upRight");
+      else jumpUpRight();
+    }
+  };
 
   /**
    * Bird collision

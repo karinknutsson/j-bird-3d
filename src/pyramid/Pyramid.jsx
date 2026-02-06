@@ -68,13 +68,25 @@ export default function Pyramid() {
 
   useEffect(() => {
     const extralivesContainer = document.querySelector(".extralives-container");
-    extralivesContainer.innerHTML = "";
+
+    if (extralivesContainer) extralivesContainer.innerHTML = "";
+
+    const extralivesContainerMobile = document.querySelector(
+      ".extralives-container-mobile",
+    );
+    if (extralivesContainerMobile) extralivesContainerMobile.innerHTML = "";
 
     for (let i = 0; i < lives - 1; i++) {
       const lifeDiv = document.createElement("div");
       lifeDiv.className = "extralife-wrapper";
       lifeDiv.innerHTML = `<img src="./jbirdicon.png" class="extralife-image" />`;
-      extralivesContainer.appendChild(lifeDiv);
+      if (extralivesContainer) extralivesContainer.appendChild(lifeDiv);
+
+      const lifeDivMobile = document.createElement("div");
+      lifeDivMobile.className = "extralife-wrapper";
+      lifeDivMobile.innerHTML = `<img src="./jbirdicon.png" class="extralife-image" />`;
+      if (extralivesContainerMobile)
+        extralivesContainerMobile.appendChild(lifeDivMobile);
     }
   }, [lives]);
 

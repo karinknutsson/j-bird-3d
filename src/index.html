@@ -11,7 +11,7 @@
     <div id="root"></div>
     <script type="module" src="./index.jsx"></script>
 
-    <div class="interface-container">
+    <div class="interface-container desktop">
       <div class="header-container">
         <h1>K·BIRD</h1>
         <div class="extralives-container"></div>
@@ -32,16 +32,22 @@
             <div class="instructions-sidebar">
               <div class="instruction-wrapper">
                 <div class="instruction-text-wrapper">Numpad 7<br />or 'Q'</div>
-                <div class="arrow-image-wrapper">
-                  <img class="arrow-image" src="./arrow-insert.png" />
-                </div>
+                <button
+                  class="arrow-image-wrapper"
+                  onclick="window.triggerKey('upLeft')"
+                >
+                  <img class="arrow-image up-left" src="./arrow-insert.png" />
+                </button>
               </div>
 
               <div class="instruction-wrapper">
                 <div class="instruction-text-wrapper">Numpad 1<br />or 'Z'</div>
-                <div class="arrow-image-wrapper down-left">
-                  <img class="arrow-image" src="./arrow-insert.png" />
-                </div>
+                <button
+                  class="arrow-image-wrapper"
+                  onclick="window.triggerKey('downLeft')"
+                >
+                  <img class="arrow-image down-left" src="./arrow-insert.png" />
+                </button>
               </div>
             </div>
 
@@ -51,16 +57,25 @@
 
             <div class="instructions-sidebar">
               <div class="instruction-wrapper">
-                <div class="arrow-image-wrapper">
+                <button
+                  class="arrow-image-wrapper"
+                  onclick="window.triggerKey('upRight')"
+                >
                   <img class="arrow-image up-right" src="./arrow-insert.png" />
-                </div>
+                </button>
                 <div class="instruction-text-wrapper">Numpad 9<br />or 'E'</div>
               </div>
 
               <div class="instruction-wrapper">
-                <div class="arrow-image-wrapper down-right">
-                  <img class="arrow-image" src="./arrow-insert.png" />
-                </div>
+                <button
+                  class="arrow-image-wrapper"
+                  onclick="window.triggerKey('downRight')"
+                >
+                  <img
+                    class="arrow-image down-right"
+                    src="./arrow-insert.png"
+                  />
+                </button>
                 <div class="instruction-text-wrapper">Numpad 3<br />or 'C'</div>
               </div>
             </div>
@@ -69,9 +84,61 @@
       </div>
     </div>
 
+    <div class="mobile-interface">
+      <div class="mobile-interface-top">
+        <h1>K·BIRD</h1>
+
+        <div class="level-wrapper">
+          <div class="level-container">
+            <div class="level-label">LEVEL</div>
+            <div class="level-value-mobile">1</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mobile-interface-bottom">
+        <div class="mobile-buttons">
+          <button
+            class="arrow-image-wrapper"
+            onclick="window.triggerKey('upLeft')"
+          >
+            <img class="arrow-image up-left" src="./arrow-insert.png" />
+          </button>
+          <button
+            class="arrow-image-wrapper"
+            onclick="window.triggerKey('downLeft')"
+          >
+            <img class="arrow-image down-left" src="./arrow-insert.png" />
+          </button>
+        </div>
+        <div class="score-container">
+          <div class="score-label">SCORE:</div>
+          <div class="score-value-mobile">0</div>
+        </div>
+
+        <div class="mobile-buttons">
+          <button
+            class="arrow-image-wrapper"
+            onclick="window.triggerKey('upRight')"
+          >
+            <img class="arrow-image up-right" src="./arrow-insert.png" />
+          </button>
+          <button
+            class="arrow-image-wrapper"
+            onclick="window.triggerKey('downRight')"
+          >
+            <img class="arrow-image down-right" src="./arrow-insert.png" />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="extralives-container-mobile"></div>
+
     <div class="game-over-container">
       <div class="game-over-text-wrapper">GAME OVER</div>
       <div class="restart-text-wrapper">PRESS SPACE TO RESTART</div>
+      <button class="restart-button">RESTART</button>
     </div>
 
     <div class="level-won-container">

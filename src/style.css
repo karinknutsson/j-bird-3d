@@ -27,6 +27,15 @@ body,
   background: black;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+}
+
+button:focus {
+  outline: 2px solid white;
+}
+
+#root > * {
+  height: 100%;
 }
 
 h1 {
@@ -38,9 +47,12 @@ h1 {
   font-weight: 400;
 }
 
-.interface-container,
-.game-over-container,
-.level-won-container {
+button {
+  background: transparent;
+  border: 0;
+}
+
+.interface-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -123,16 +135,20 @@ h1 {
   justify-content: space-between;
 }
 
-.down-left {
-  transform: rotate(-90deg);
-}
-
-.down-right {
-  transform: rotate(180deg);
+.up-left {
+  transform: rotate(-10deg);
 }
 
 .up-right {
-  transform: rotate(90deg);
+  transform: rotate(100deg);
+}
+
+.down-left {
+  transform: rotate(-80deg);
+}
+
+.down-right {
+  transform: rotate(170deg);
 }
 
 .restart-text-wrapper {
@@ -151,6 +167,17 @@ h1 {
   gap: 16px;
 }
 
+.restart-button {
+  padding: 0 64px;
+  height: 48px;
+  border: 2px solid white;
+  border-radius: 4px;
+  background: black;
+  font-family: "VT323", monospace;
+  font-size: 1.6rem;
+  color: white;
+}
+
 .arrow-image-wrapper {
   width: 48px;
   height: 48px;
@@ -166,13 +193,27 @@ h1 {
   height: 40px;
 }
 
+.level-won-container {
+  z-index: 1001;
+}
+
+.game-over-container {
+  z-index: 1002;
+}
+
 .game-over-container,
 .level-won-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.7);
   opacity: 0;
+  pointer-events: none;
 }
 
 .game-over-container {
@@ -185,4 +226,112 @@ h1 {
   color: white;
   font-family: "Sixtyfour", monospace;
   font-size: 3.6rem;
+}
+
+.mobile-interface,
+.extralives-container-mobile,
+.restart-button {
+  display: none;
+}
+
+.instruction-wrapper {
+  pointer-events: auto;
+}
+
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 2.4rem;
+    margin: 0;
+  }
+
+  .restart-button {
+    display: block;
+    pointer-events: auto;
+  }
+
+  .restart-text-wrapper {
+    display: none;
+  }
+
+  .score-container {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .score-value-mobile {
+    font-size: 1.6rem;
+  }
+
+  .mobile-interface-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 16px;
+  }
+
+  .mobile-interface-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .level-container {
+    font-size: 1rem;
+  }
+
+  .extralives-container-mobile {
+    position: absolute;
+    top: 112px;
+    right: 24px;
+    width: 48px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .extralife-image {
+    width: 48px;
+    height: 48px;
+  }
+
+  .desktop {
+    display: none !important;
+  }
+
+  .mobile-interface {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+
+  .mobile-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .bottom {
+    align-items: flex-end;
+  }
+
+  .game-over-text-wrapper,
+  .level-won-text-wrapper {
+    font-size: 2rem;
+  }
 }

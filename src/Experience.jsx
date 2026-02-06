@@ -38,6 +38,9 @@ export default function Experience() {
     gsap.to(".game-over-container", { opacity: 0, duration: 0.5 });
   }
 
+  const restartButton = document.querySelector(".restart-button");
+  restartButton.addEventListener("click", () => restartGame());
+
   useEffect(() => {
     const unsubscribeRestart = subscribeKeys(
       (state) => state.restart,
@@ -55,11 +58,17 @@ export default function Experience() {
   useEffect(() => {
     const scoreValue = document.querySelector(".score-value");
     if (scoreValue) scoreValue.textContent = score;
+
+    const scoreValueMobile = document.querySelector(".score-value-mobile");
+    if (scoreValueMobile) scoreValueMobile.textContent = score;
   }, [score]);
 
   useEffect(() => {
     const levelValue = document.querySelector(".level-value");
     if (levelValue) levelValue.textContent = currentLevel;
+
+    const levelValueMobile = document.querySelector(".level-value-mobile");
+    if (levelValueMobile) levelValueMobile.textContent = currentLevel;
   }, [currentLevel]);
 
   useEffect(() => {

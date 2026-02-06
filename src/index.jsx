@@ -5,31 +5,33 @@ import Experience from "./Experience.jsx";
 import { KeyboardControls } from "@react-three/drei";
 import CameraController from "./CameraController.jsx";
 
-const root = ReactDOM.createRoot(document.querySelector("#root"));
-
-root.render(
-  <>
-    <KeyboardControls
-      map={[
-        { name: "upLeft", keys: ["Numpad7", "KeyQ"] },
-        { name: "upRight", keys: ["Numpad9", "KeyE"] },
-        { name: "downLeft", keys: ["Numpad1", "KeyZ"] },
-        { name: "downRight", keys: ["Numpad3", "KeyC"] },
-        { name: "restart", keys: ["Space"] },
-      ]}
-    >
-      <Canvas
-        camera={{
-          fov: 45,
-          near: 0.1,
-          far: 200,
-          position: [5, 6, 5],
-        }}
+function Root() {
+  return (
+    <>
+      <KeyboardControls
+        map={[
+          { name: "upLeft", keys: ["Numpad7", "KeyQ"] },
+          { name: "upRight", keys: ["Numpad9", "KeyE"] },
+          { name: "downLeft", keys: ["Numpad1", "KeyZ"] },
+          { name: "downRight", keys: ["Numpad3", "KeyC"] },
+          { name: "restart", keys: ["Space"] },
+        ]}
       >
-        {/* <Canvas> */}
-        <CameraController />
-        <Experience />
-      </Canvas>
-    </KeyboardControls>
-  </>,
-);
+        <Canvas
+          camera={{
+            fov: 45,
+            near: 0.1,
+            far: 200,
+            position: [5, 6, 5],
+          }}
+        >
+          <CameraController />
+          <Experience />
+        </Canvas>
+      </KeyboardControls>
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.querySelector("#root"));
+root.render(<Root />);
