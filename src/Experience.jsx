@@ -38,6 +38,9 @@ export default function Experience() {
     gsap.to(".game-over-container", { opacity: 0, duration: 0.5 });
   }
 
+  const restartButton = document.querySelector(".restart-button");
+  restartButton.addEventListener("click", () => restartGame());
+
   useEffect(() => {
     const unsubscribeRestart = subscribeKeys(
       (state) => state.restart,
