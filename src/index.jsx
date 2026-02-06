@@ -4,7 +4,6 @@ import { Canvas } from "@react-three/fiber";
 import Experience from "./Experience.jsx";
 import { KeyboardControls } from "@react-three/drei";
 import CameraController from "./CameraController.jsx";
-import { BrowserView, MobileView } from "react-device-detect";
 
 function Root() {
   return (
