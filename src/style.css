@@ -30,6 +30,10 @@ body,
   overflow: hidden;
 }
 
+button:focus {
+  outline: 2px solid white;
+}
+
 #root > * {
   height: 100%;
 }
