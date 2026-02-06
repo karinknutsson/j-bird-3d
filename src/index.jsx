@@ -9,34 +9,17 @@ import { BrowserView, MobileView } from "react-device-detect";
 function Root() {
   return (
     <>
-      <BrowserView>
-        <KeyboardControls
-          map={[
-            { name: "upLeft", keys: ["Numpad7", "KeyQ"] },
-            { name: "upRight", keys: ["Numpad9", "KeyE"] },
-            { name: "downLeft", keys: ["Numpad1", "KeyZ"] },
-            { name: "downRight", keys: ["Numpad3", "KeyC"] },
-            { name: "restart", keys: ["Space"] },
-          ]}
-        >
-          <Canvas
-            camera={{
-              zoom: 3,
-              fov: 45,
-              near: 0.1,
-              far: 200,
-              position: [5, 6, 5],
-            }}
-          >
-            <CameraController />
-            <Experience />
-          </Canvas>
-        </KeyboardControls>
-      </BrowserView>
-      <MobileView>
+      <KeyboardControls
+        map={[
+          { name: "upLeft", keys: ["Numpad7", "KeyQ"] },
+          { name: "upRight", keys: ["Numpad9", "KeyE"] },
+          { name: "downLeft", keys: ["Numpad1", "KeyZ"] },
+          { name: "downRight", keys: ["Numpad3", "KeyC"] },
+          { name: "restart", keys: ["Space"] },
+        ]}
+      >
         <Canvas
           camera={{
-            zoom: 3,
             fov: 45,
             near: 0.1,
             far: 200,
@@ -46,7 +29,7 @@ function Root() {
           <CameraController />
           <Experience />
         </Canvas>
-      </MobileView>
+      </KeyboardControls>
     </>
   );
 }
