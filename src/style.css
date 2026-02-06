@@ -206,6 +206,11 @@ button {
 }
 
 @media (max-width: 1024px) {
+  h1 {
+    font-size: 3.2rem;
+    margin: 0;
+  }
+
   .desktop {
     display: none !important;
   }
