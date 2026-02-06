@@ -70,12 +70,20 @@ export default function Pyramid() {
     const extralivesContainer = document.querySelector(".extralives-container");
     extralivesContainer.innerHTML = "";
 
+    const extralivesContainerMobile = document.querySelector(
+      ".extralives-container-mobile",
+    );
+    extralivesContainerMobile.innerHTML = "";
+
     for (let i = 0; i < lives - 1; i++) {
       const lifeDiv = document.createElement("div");
       lifeDiv.className = "extralife-wrapper";
       lifeDiv.innerHTML = `<img src="./jbirdicon.png" class="extralife-image" />`;
       extralivesContainer.appendChild(lifeDiv);
+      extralivesContainerMobile.appendChild(lifeDiv);
     }
+
+    console.log(extralivesContainer.innerHTML);
   }, [lives]);
 
   useEffect(() => {

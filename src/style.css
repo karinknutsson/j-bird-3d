@@ -207,8 +207,51 @@ button {
 
 @media (max-width: 1024px) {
   h1 {
-    font-size: 3.2rem;
+    font-size: 2.6rem;
     margin: 0;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .score-container {
+    font-size: 1rem;
+  }
+
+  .mobile-interface-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .mobile-interface-center {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .level-container {
+    font-size: 1rem;
+    transform: translateX(-50%) rotate(-90deg);
+  }
+
+  .extralives-container-mobile {
+    width: 64px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .extralife-image {
+    width: 48px;
+    height: 48px;
   }
 
   .desktop {
@@ -232,7 +275,12 @@ button {
   .mobile-buttons {
     width: 100%;
     display: flex;
+
     justify-content: space-between;
+  }
+
+  .bottom {
+    align-items: flex-end;
   }
 
   .game-over-text-wrapper,
