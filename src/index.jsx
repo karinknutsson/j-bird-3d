@@ -4,32 +4,50 @@ import { Canvas } from "@react-three/fiber";
 import Experience from "./Experience.jsx";
 import { KeyboardControls } from "@react-three/drei";
 import CameraController from "./CameraController.jsx";
+import { BrowserView, MobileView } from "react-device-detect";
+
+function Root() {
+  return (
+    <>
+      <BrowserView>
+        <KeyboardControls
+          map={[
+            { name: "upLeft", keys: ["Numpad7", "KeyQ"] },
+            { name: "upRight", keys: ["Numpad9", "KeyE"] },
+            { name: "downLeft", keys: ["Numpad1", "KeyZ"] },
+            { name: "downRight", keys: ["Numpad3", "KeyC"] },
+            { name: "restart", keys: ["Space"] },
+          ]}
+        >
+          <Canvas
+            camera={{
+              fov: 45,
+              near: 0.1,
+              far: 200,
+              position: [5, 6, 5],
+            }}
+          >
+            <CameraController />
+            <Experience />
+          </Canvas>
+        </KeyboardControls>
+      </BrowserView>
+      <MobileView>
+        <Canvas
+          camera={{
+            fov: 45,
+            near: 0.1,
+            far: 200,
+            position: [5, 6, 5],
+          }}
+        >
+          <CameraController />
+          <Experience />
+        </Canvas>
+      </MobileView>
+    </>
+  );
+}
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
-
-root.render(
-  <>
-    <KeyboardControls
-      map={[
-        { name: "upLeft", keys: ["Numpad7", "KeyQ"] },
-        { name: "upRight", keys: ["Numpad9", "KeyE"] },
-        { name: "downLeft", keys: ["Numpad1", "KeyZ"] },
-        { name: "downRight", keys: ["Numpad3", "KeyC"] },
-        { name: "restart", keys: ["Space"] },
-      ]}
-    >
-      <Canvas
-        camera={{
-          fov: 45,
-          near: 0.1,
-          far: 200,
-          position: [5, 6, 5],
-        }}
-      >
-        {/* <Canvas> */}
-        <CameraController />
-        <Experience />
-      </Canvas>
-    </KeyboardControls>
-  </>,
-);
+root.render(<Root />);
