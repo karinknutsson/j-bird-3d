@@ -21,6 +21,7 @@ function Root() {
         >
           <Canvas
             camera={{
+              zoom: 3,
               fov: 45,
               near: 0.1,
               far: 200,
@@ -35,6 +36,7 @@ function Root() {
       <MobileView>
         <Canvas
           camera={{
+            zoom: 3,
             fov: 45,
             near: 0.1,
             far: 200,
