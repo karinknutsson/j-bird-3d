@@ -213,7 +213,7 @@ button {
   justify-content: center;
   background: rgba(0, 0, 0, 0.7);
   opacity: 0;
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 .game-over-container {
@@ -229,7 +229,8 @@ button {
 }
 
 .mobile-interface,
-.extralives-container-mobile {
+.extralives-container-mobile,
+.restart-button {
   display: none;
 }
 
@@ -241,6 +242,11 @@ button {
   h1 {
     font-size: 2.4rem;
     margin: 0;
+  }
+
+  .restart-button {
+    display: block;
+    pointer-events: auto;
   }
 
   .restart-text-wrapper {
