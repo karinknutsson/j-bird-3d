@@ -5,9 +5,11 @@ import * as THREE from "three";
 
 export default function Lights() {
   const lightRef = useRef();
-
   const { cameraPosition, lightPositions, isCameraMoving } = useGame();
 
+  /**
+   * Move lights with camera movement to keep the pyramid lit from the same direction
+   */
   useFrame((_, delta) => {
     if (!lightRef.current) return;
 

@@ -52,6 +52,9 @@ export default function Pyramid() {
   const [activeIndex, setActiveIndex] = useState(lives - 1);
   const [showBird, setShowBird] = useState(true);
 
+  /**
+   * When bird dies, lose a life and either end game if there are no extra lives left, or restart level with one less life
+   */
   function handleDeath() {
     setLives((prev) => prev - 1);
     setShowBird(false);
@@ -66,6 +69,9 @@ export default function Pyramid() {
     }
   }
 
+  /**
+   * Update number of lives in the interface when lives change
+   */
   useEffect(() => {
     const extralivesContainer = document.querySelector(".extralives-container");
 
@@ -90,6 +96,9 @@ export default function Pyramid() {
     }
   }, [lives]);
 
+  /**
+   * Set cube count based on the number of layers in the pyramid
+   */
   useEffect(() => {
     const totalCubes = 2 * Math.pow(layerCount, 2) - 2 * layerCount + 1;
     setCubeCount(totalCubes);

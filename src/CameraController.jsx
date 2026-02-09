@@ -7,6 +7,9 @@ export default function CameraController() {
   const { cameraPosition, cameraPositions, isCameraMoving, stopCamera } =
     useGame();
 
+  /**
+   * Move camera to show other side of the pyramid when player has jumped over an edge
+   */
   useFrame((_, delta) => {
     if (!camera) return;
 

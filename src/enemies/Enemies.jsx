@@ -12,6 +12,9 @@ export default function Enemies() {
     cameraPositionRef.current = cameraPosition;
   }, [cameraPosition]);
 
+  /**
+   * Spawn enemies at set intervals, jumping down the side of the pyramid currently facing the camera
+   */
   useEffect(() => {
     if (phase === "playing") {
       intervalRef.current = setInterval(() => {
@@ -21,6 +24,7 @@ export default function Enemies() {
         ]);
       }, enemyInterval);
     } else if (phase === "ready" || phase === "end") {
+      // Clear enemies and intervals when game is not playing
       setEnemyEggs((prev) => prev.map((egg) => ({ ...egg, active: false })));
       clearInterval(intervalRef.current);
       intervalRef.current = null;
