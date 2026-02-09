@@ -335,3 +335,12 @@ button {
     font-size: 2rem;
   }
 }
+
+@media (max-width: 1024px) and (orientation: landscape) {
+  .extralives-container-mobile {
+    top: 24px;
+    width: 156px;
+    justify-content: flex-end;
+    flex-direction: row;
+  }
+}
