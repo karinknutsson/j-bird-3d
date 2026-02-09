@@ -21,7 +21,7 @@ A 3D remake of the classic DOS game **J-Bird**, built with **Three.js** and **Re
 1. Clone the repo:
 
 ```bash
-git clone https://github.com/yourusername/k-bird.git
+git clone https://github.com/karinknutsson/k-bird.git
 cd k-bird
 ```
 
