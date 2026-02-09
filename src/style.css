@@ -335,3 +335,25 @@ button {
     font-size: 2rem;
   }
 }
+
+@media (max-width: 1024px) and (orientation: landscape) {
+  .mobile-interface-top {
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .extralives-container-mobile {
+    top: 24px;
+    width: 156px;
+    justify-content: flex-end;
+    flex-direction: row;
+  }
+
+  .score-container {
+    flex-direction: row;
+  }
+
+  .mobile-interface-bottom {
+    align-items: flex-end;
+  }
+}
