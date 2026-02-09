@@ -64,6 +64,9 @@ export default function EnemyEgg({ active, cameraPosition, scale = 1 }) {
     });
   };
 
+  /**
+   * Make enemy jump in random directions down the side of the pyramid when active
+   */
   useEffect(() => {
     if (active) {
       intervalRef.current = setInterval(() => {
@@ -75,6 +78,7 @@ export default function EnemyEgg({ active, cameraPosition, scale = 1 }) {
         }
       }, 1000);
     } else {
+      // Clear interval when inactive
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
