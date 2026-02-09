@@ -10,7 +10,6 @@ const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
 
 export default function Cube({ size, position }) {
   const [isTouched, setIsTouched] = useState(false);
-
   const { phase, incrementCubeHits, incrementScore } = useGame();
 
   /**

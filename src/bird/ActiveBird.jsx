@@ -8,10 +8,9 @@ import * as THREE from "three";
 
 export default function ActiveBird({ onDie }) {
   const birdRef = useRef();
-
   const birdDirection = useRef("downLeft");
-  const [subscribeKeys] = useKeyboardControls();
   const isJumpingRef = useRef(true);
+  const [subscribeKeys] = useKeyboardControls();
 
   const { start, pause, unpause, cameraPosition, moveCamera, phase } =
     useGame();
