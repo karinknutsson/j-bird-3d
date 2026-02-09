@@ -4,7 +4,7 @@ A 3D remake of the classic DOS game **J-Bird**, built with **Three.js** and **Re
 
 ## Gameplay
 
-- **Numpad keys / WQEZC:** Move the bird
+- **Numpad keys / QEZC:** Move the bird
 - The bird can also be moved by clicking/tapping the arrow buttons
 - **Goal:** avoid falling down, dodge tangerines, collect points
 
