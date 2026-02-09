@@ -348,4 +348,12 @@ button {
     justify-content: flex-end;
     flex-direction: row;
   }
+
+  .score-container {
+    flex-direction: row;
+  }
+
+  .mobile-interface-bottom {
+    align-items: flex-end;
+  }
 }
