@@ -31,6 +31,9 @@ export default function Experience() {
     incrementRestartCount,
   } = useGame();
 
+  /**
+   * Restart the game by pressing button (mobile) or spacebar (desktop)
+   */
   function restartGame() {
     resetGame();
     incrementRestartCount();
@@ -55,6 +58,9 @@ export default function Experience() {
     };
   }, [phase]);
 
+  /**
+   * Keep track of current score and level and update values in the interface
+   */
   useEffect(() => {
     const scoreValue = document.querySelector(".score-value");
     if (scoreValue) scoreValue.textContent = score;
@@ -71,8 +77,12 @@ export default function Experience() {
     if (levelValueMobile) levelValueMobile.textContent = currentLevel;
   }, [currentLevel]);
 
+  /**
+   * Check if player has hit all cubes in the current level
+   */
   useEffect(() => {
     if (phase === "playing" && cubeHits >= cubeCount) {
+      // Pause game and show level won message
       setTimeout(() => {
         pause();
         incrementScore(200 * currentLevel);
@@ -83,6 +93,7 @@ export default function Experience() {
         });
       }, 300);
 
+      // Prepare next level, unpause game and remove level won message
       setTimeout(() => {
         resetCubeHits();
         incrementCurrentLevel();
@@ -103,10 +114,14 @@ export default function Experience() {
 
   return (
     <>
-      {/* <Physics debug paused={phase === "pause"}> */}
+      {/* Physics pause when game pauses */}
       <Physics paused={phase === "pause"}>
         <Lights />
+
+        {/* Pyramid set to rerender when level restarts */}
         <Pyramid key={restartCount} />
+
+        {/* Show enemies from level 3 */}
         {layerCount > 2 && <Enemies />}
       </Physics>
     </>
