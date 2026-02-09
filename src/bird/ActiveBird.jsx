@@ -56,9 +56,9 @@ export default function ActiveBird({ onDie }) {
     }
   }, [cameraPosition]);
 
+  // Store movement and camera position in refs to access current value in jump functions
   const movementRef = useRef(movement);
   movementRef.current = movement;
-
   const cameraPositionRef = useRef(cameraPosition);
   cameraPositionRef.current = cameraPosition;
 
@@ -67,6 +67,7 @@ export default function ActiveBird({ onDie }) {
     isJumpingRef.current = value;
   }
 
+  // Set jump height and rotation
   const smallJump = 1.2;
   const bigJump = 2.4;
   const quarterTurn = 0.035;
@@ -101,6 +102,7 @@ export default function ActiveBird({ onDie }) {
       });
     }
 
+    // Apply rotation
     if (birdDirection.current === "downLeft") {
       birdRef.current.applyTorqueImpulse({ x: 0, y: -quarterTurn, z: 0 });
     } else if (birdDirection.current === "downRight") {
@@ -109,6 +111,7 @@ export default function ActiveBird({ onDie }) {
       birdRef.current.applyTorqueImpulse({ x: 0, y: quarterTurn, z: 0 });
     }
 
+    // Update bird direction for next jump
     birdDirection.current = birdOnEdge ? "downLeft" : "upLeft";
   };
 
@@ -142,6 +145,7 @@ export default function ActiveBird({ onDie }) {
       });
     }
 
+    // Apply rotation
     if (birdDirection.current === "downLeft") {
       birdRef.current.applyTorqueImpulse({ x: 0, y: 2 * quarterTurn, z: 0 });
     } else if (birdDirection.current === "downRight") {
@@ -150,18 +154,22 @@ export default function ActiveBird({ onDie }) {
       birdRef.current.applyTorqueImpulse({ x: 0, y: -quarterTurn, z: 0 });
     }
 
+    // Update bird direction for next jump
     birdDirection.current = birdOnEdge ? "downRight" : "upRight";
   };
 
   // Jump down left
   const jumpDownLeft = () => {
     setIsJumpingRef(true);
+
+    // Apply jump impulse
     birdRef.current.applyImpulse({
       x: movementRef.current.downLeft.x,
       y: smallJump,
       z: movementRef.current.downLeft.z,
     });
 
+    // Apply rotation
     if (birdDirection.current === "downRight") {
       birdRef.current.applyTorqueImpulse({ x: 0, y: -quarterTurn, z: 0 });
     } else if (birdDirection.current === "upRight") {
@@ -170,18 +178,22 @@ export default function ActiveBird({ onDie }) {
       birdRef.current.applyTorqueImpulse({ x: 0, y: quarterTurn, z: 0 });
     }
 
+    // Update bird direction for next jump
     birdDirection.current = "downLeft";
   };
 
   // Jump down right
   const jumpDownRight = () => {
     setIsJumpingRef(true);
+
+    // Apply jump impulse
     birdRef.current.applyImpulse({
       x: movementRef.current.downRight.x,
       y: smallJump,
       z: movementRef.current.downRight.z,
     });
 
+    // Apply rotation
     if (birdDirection.current === "downLeft") {
       birdRef.current.applyTorqueImpulse({ x: 0, y: quarterTurn, z: 0 });
     } else if (birdDirection.current === "upRight") {
@@ -190,6 +202,7 @@ export default function ActiveBird({ onDie }) {
       birdRef.current.applyTorqueImpulse({ x: 0, y: 2 * quarterTurn, z: 0 });
     }
 
+    // Update bird direction for next jump
     birdDirection.current = "downRight";
   };
 
@@ -385,6 +398,7 @@ export default function ActiveBird({ onDie }) {
     }
   };
 
+  // Reset bird position and rotation
   function resetBird() {
     birdRef.current.setLinvel({ x: 0, y: 0, z: 0 }, true);
     birdRef.current.setAngvel({ x: 0, y: 0, z: 0 }, true);
@@ -413,12 +427,14 @@ export default function ActiveBird({ onDie }) {
     birdDirection.current = "downLeft";
   }
 
+  // Reset bird when phase changes to ready
   useEffect(() => {
     if (phase === "ready") {
       resetBird();
     }
   }, [phase]);
 
+  // Kill bird if it falls off pyramid
   useFrame(() => {
     if (birdRef.current && birdRef.current.translation().y < -6) onDie();
   });
