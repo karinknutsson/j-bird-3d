@@ -337,6 +337,11 @@ button {
 }
 
 @media (max-width: 1024px) and (orientation: landscape) {
+  .mobile-interface-top {
+    flex-direction: row;
+    gap: 24px;
+  }
+
   .extralives-container-mobile {
     top: 24px;
     width: 156px;
