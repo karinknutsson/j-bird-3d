@@ -14,6 +14,7 @@ A 3D remake of the classic DOS game **J-Bird**, built with **Three.js** and **Re
 - **Utilities / Helpers:** @react-three/drei
 - **Physics:** Rapier (R3F physics engine)
 - **Frontend:** React
+- **State Management:** Zustand
 - **Dev Environment:** Vite
 
 ## How to Play Locally
