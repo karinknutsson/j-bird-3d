@@ -27,10 +27,12 @@ function getCubeRing(level) {
 }
 
 export function CubeLevel({ level }) {
+  // Get cube positions for the level
   const positions = getCubeRing(level);
 
   return (
     <group position={[0, -level * cubeSize, 0]}>
+      {/* Render cubes based on positions for the level */}
       {positions.map((p, index) => {
         return (
           <Cube
@@ -107,6 +109,7 @@ export default function Pyramid() {
   return (
     <>
       <group position={[0, layerCount * cubeSize * 0.5, 0]}>
+        {/* Render cube levels based on the number of layers in the pyramid */}
         {[...Array(layerCount)].map((_, index) => {
           return (
             <CubeLevel
@@ -117,6 +120,7 @@ export default function Pyramid() {
         })}
       </group>
 
+      {/* Show active bird  */}
       {showBird && <ActiveBird onDie={handleDeath} />}
     </>
   );

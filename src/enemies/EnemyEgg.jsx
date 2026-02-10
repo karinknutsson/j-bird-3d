@@ -100,7 +100,10 @@ export default function EnemyEgg({ active, cameraPosition, scale = 1 }) {
           scale={scale}
           name="enemyEgg"
         >
+          {/* Enemy collider */}
           <CapsuleCollider args={[0.04, 0.16]} mass={0.5} />
+
+          {/* Enemy mesh */}
           <mesh
             position={[0, -0.06, 0]}
             rotation={[Math.PI * 0.5, 0, 0]}

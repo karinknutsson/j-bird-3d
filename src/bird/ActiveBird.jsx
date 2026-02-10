@@ -335,7 +335,7 @@ export default function ActiveBird({ onDie }) {
    * Bird collision
    */
   const birdCollision = (e) => {
-    // Die on enemy egg collision
+    // Die and briefly pause game on enemy egg collision
     if (e.rigidBodyObject.name === "enemyEgg") {
       pause();
 
