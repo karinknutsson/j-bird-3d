@@ -1,6 +1,6 @@
 # K-Bird
 
-A 3D remake of the classic DOS game **J-Bird**, built with **Three.js** and **React Three Fiber (R3F)**. Jump around the pyramid to hit all the cubes, collect points, and stay away from the tangerines!
+A 3D remake of the classic DOS game **J-Bird**, built with **Three.js** and **React Three Fiber (R3F)**. Jump around the pyramid to hit all the cubes, collect points, and stay away from those tangerines!
 
 ## Gameplay
 

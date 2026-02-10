@@ -10,8 +10,40 @@ export default create(
        */
       currentLevel: 1,
       layerCount: 2,
-      enemyInterval: 6000,
       livesCount: 4,
+
+      incrementCurrentLevel: () => {
+        set((state) => {
+          return {
+            currentLevel: state.currentLevel + 1,
+          };
+        });
+      },
+
+      incrementLayerCount: () => {
+        set((state) => {
+          return {
+            layerCount: state.layerCount + 1,
+          };
+        });
+      },
+
+      /**
+       * Enemies
+       */
+      enemyInterval: 6000,
+
+      setEnemyInterval: (value) => {
+        set((_) => {
+          return {
+            enemyInterval: value,
+          };
+        });
+      },
+
+      /**
+       * Restart and reset
+       */
       restartCount: 0,
 
       incrementRestartCount: () =>
@@ -26,30 +58,6 @@ export default create(
             cubeHits: 0,
             score: 0,
             livesCount: 4,
-          };
-        });
-      },
-
-      setEnemyInterval: (value) => {
-        set((_) => {
-          return {
-            enemyInterval: value,
-          };
-        });
-      },
-
-      incrementCurrentLevel: () => {
-        set((state) => {
-          return {
-            currentLevel: state.currentLevel + 1,
-          };
-        });
-      },
-
-      incrementLayerCount: () => {
-        set((state) => {
-          return {
-            layerCount: state.layerCount + 1,
           };
         });
       },
@@ -87,7 +95,6 @@ export default create(
       /**
        * Score
        */
-
       score: 0,
 
       incrementScore: (value) => {
