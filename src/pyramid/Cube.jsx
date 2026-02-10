@@ -29,7 +29,7 @@ export default function Cube({ size, position }) {
 
   return (
     <RigidBody type="fixed" colliders={false} position={position}>
-      {/* Collider */}
+      {/* Cube collider */}
       <CuboidCollider
         onCollisionEnter={handleHitCube}
         args={[0.25, 0.25, 0.25]}
