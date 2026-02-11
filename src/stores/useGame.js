@@ -10,7 +10,7 @@ export default create(
        */
       currentLevel: 1,
       layerCount: 2,
-      livesCount: 4,
+      livesCount: 2,
 
       incrementCurrentLevel: () => {
         set((state) => {
@@ -172,7 +172,7 @@ export default create(
       },
 
       ready: () => {
-        set((_) => {
+        set(() => {
           return {
             phase: "ready",
           };
@@ -188,26 +188,31 @@ export default create(
       },
 
       unpause: () => {
-        set(() => {
-          return {
-            phase: "ready",
-          };
+        set((state) => {
+          if (state.phase !== "ended") {
+            return {
+              phase: "ready",
+            };
+          }
+
+          return {};
         });
       },
 
       restart: () => {
         set((state) => {
-          if (state.phase === "playing" || state.phase === "ended")
+          if (state.phase === "playing" || state.phase === "ended") {
             return {
               phase: "ready",
             };
+          }
 
           return {};
         });
       },
 
       end: () => {
-        set((_) => {
+        set(() => {
           return {
             phase: "ended",
           };

@@ -23,7 +23,7 @@ export default function Enemies() {
           { active: true, cameraPosition: cameraPositionRef.current },
         ]);
       }, enemyInterval);
-    } else if (phase === "ready" || phase === "end") {
+    } else if (phase === "ready" || phase === "ended") {
       // Clear enemies and intervals when game is not playing
       setEnemyEggs((prev) => prev.map((egg) => ({ ...egg, active: false })));
       clearInterval(intervalRef.current);
