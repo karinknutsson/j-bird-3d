@@ -341,7 +341,8 @@ export default function ActiveBird({ onDie }) {
 
       setTimeout(() => {
         onDie();
-        unpause();
+
+        if (phase !== ended) unpause();
       }, 2000);
       return;
     }
