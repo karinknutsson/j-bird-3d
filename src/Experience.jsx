@@ -50,8 +50,6 @@ export default function Experience() {
       (value) => {
         if (!value) return;
 
-        console.log("Restart key pressed");
-
         if (phase === "ended") restartGame();
       },
     );

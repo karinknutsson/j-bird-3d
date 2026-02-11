@@ -161,9 +161,7 @@ export default create(
 
       start: () => {
         set((state) => {
-          console.log("start called");
           if (state.phase === "ready") {
-            console.log("starting");
             return {
               phase: "playing",
             };
@@ -174,8 +172,7 @@ export default create(
       },
 
       ready: () => {
-        console.log("ready");
-        set((_) => {
+        set(() => {
           return {
             phase: "ready",
           };
@@ -183,7 +180,6 @@ export default create(
       },
 
       pause: () => {
-        console.log("pause");
         set(() => {
           return {
             phase: "pause",
@@ -192,30 +188,31 @@ export default create(
       },
 
       unpause: () => {
-        console.log("unpause");
-        set(() => {
-          return {
-            phase: "ready",
-          };
+        set((state) => {
+          if (state.phase !== "ended") {
+            return {
+              phase: "ready",
+            };
+          }
+
+          return {};
         });
       },
 
       restart: () => {
-        console.log("restart called");
         set((state) => {
-          if (state.phase === "playing" || state.phase === "ended")
-            console.log("restarting");
-          return {
-            phase: "ready",
-          };
+          if (state.phase === "playing" || state.phase === "ended") {
+            return {
+              phase: "ready",
+            };
+          }
 
           return {};
         });
       },
 
       end: () => {
-        console.log("ended");
-        set((_) => {
+        set(() => {
           return {
             phase: "ended",
           };
