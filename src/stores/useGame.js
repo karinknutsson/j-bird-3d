@@ -10,7 +10,7 @@ export default create(
        */
       currentLevel: 1,
       layerCount: 2,
-      livesCount: 2,
+      livesCount: 4,
 
       incrementCurrentLevel: () => {
         set((state) => {
